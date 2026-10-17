@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 import { Loading } from '@/components/ui';
 import { useColorScheme } from '@/components/useColorScheme';
 import { AuthProvider, useAuth } from '@/lib/auth';
+import { SettingsProvider } from '@/lib/settings';
 import '@/lib/i18n';
 
 export {
@@ -22,19 +23,28 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [queryClient] = useState(() => new QueryClient());
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-            <RootStack />
-          </ThemeProvider>
+          <SettingsProvider>
+            <ThemedRoot />
+          </SettingsProvider>
         </AuthProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>
+  );
+}
+
+// Inside SettingsProvider, so the navigation theme follows the theme chosen in Settings.
+function ThemedRoot() {
+  const colorScheme = useColorScheme();
+  return (
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <RootStack />
+    </ThemeProvider>
   );
 }
 
@@ -64,6 +74,8 @@ function RootStack() {
         <Stack.Screen name="event/[id]" options={{ title: '', headerBackTitle: t('tabs.nearby') }} />
         <Stack.Screen name="event/new" options={{ title: t('create.title'), presentation: 'modal' }} />
         <Stack.Screen name="event/edit/[id]" options={{ title: t('edit.title'), presentation: 'modal' }} />
+        <Stack.Screen name="friends" options={{ title: t('friends.title') }} />
+        <Stack.Screen name="user/[username]" options={{ title: '' }} />
       </Stack.Protected>
     </Stack>
   );

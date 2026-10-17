@@ -6,29 +6,6 @@
     "nearby": "Cerca",
     "settings": "Ajustes"
   },
-  "screens": {
-    "profile": {
-      "title": "Tu perfil",
-      "description": "Tu foto, una breve descripción y tus canciones favoritas de Spotify."
-    },
-    "forYou": {
-      "title": "Para ti",
-      "description": "Lo que hacen tus amigos y las novedades de los eventos a los que vas o que te interesan."
-    },
-    "events": {
-      "title": "Tus eventos",
-      "description": "Los eventos que organizas y aquellos a los que dijiste sí o me interesa."
-    },
-    "nearby": {
-      "title": "Eventos cerca",
-      "description": "Desliza entre los eventos de tu zona. Elige hasta dónde buscar con el control de distancia."
-    },
-    "settings": {
-      "title": "Ajustes",
-      "description": "Privacidad, idioma, tamaño del texto y tema."
-    }
-  },
-  "comingSoon": "Llega en la fase {{phase}}",
   "notFound": {
     "title": "No encontrado",
     "message": "Esta pantalla no existe.",
@@ -160,11 +137,38 @@
   "profile": {
     "bio": "Sobre ti",
     "bioPlaceholder": "Una breve descripción",
-    "verified": "Verificado"
+    "verified": "Verificado",
+    "changePhoto": "Cambiar foto",
+    "uploading": "Subiendo…",
+    "friends_one": "{{count}} amigo",
+    "friends_other": "{{count}} amigos",
+    "songsSoon": "Tus canciones favoritas de Spotify llegan en la siguiente fase.",
+    "edit": "Editar tu perfil"
   },
   "settings": {
     "signOut": "Cerrar sesión",
-    "more": "Los ajustes de privacidad, idioma, tamaño del texto y tema llegan en la fase 3."
+    "language": "Idioma",
+    "theme": "Tema",
+    "themes": {
+      "system": "Como el dispositivo",
+      "light": "Claro",
+      "dark": "Oscuro"
+    },
+    "textSize": "Tamaño del texto",
+    "textSizes": {
+      "small": "Pequeño",
+      "default": "Normal",
+      "large": "Grande",
+      "larger": "Muy grande"
+    },
+    "defaultDistance": "Cerca de ti empieza en",
+    "privacy": "Privacidad",
+    "shareComments": "Mostrar mis comentarios a mis amigos",
+    "shareCommentsHint": "Tus amigos ven tus comentarios en su Para ti.",
+    "shareAttendance": "Mostrar los eventos a los que voy",
+    "shareAttendanceHint": "Tus amigos ven en su Para ti los eventos a los que vas o te interesan.",
+    "blocked": "Personas bloqueadas",
+    "noBlocked": "No has bloqueado a nadie."
   },
   "edit": {
     "title": "Editar evento",
@@ -189,5 +193,35 @@
     "you": "Tú",
     "empty": "Aún no hay comentarios. Sé el primero en preguntar.",
     "replyingTo": "Respondiendo a {{name}}"
+  },
+  "friends": {
+    "title": "Amigos",
+    "search": "Buscar personas",
+    "searchPlaceholder": "Busca por nombre de usuario",
+    "noResults": "Nadie tiene ese nombre de usuario.",
+    "incoming": "Solicitudes de amistad",
+    "yourFriends": "Tus amigos",
+    "none": "Aún no tienes amigos. Busca a gente que conozcas por su nombre de usuario.",
+    "outgoing": "Solicitudes enviadas",
+    "add": "Añadir amigo",
+    "accept": "Aceptar",
+    "decline": "Rechazar",
+    "requested": "Enviada · Cancelar",
+    "unfriend": "Eliminar amigo",
+    "block": "Bloquear",
+    "unblock": "Desbloquear",
+    "blockConfirm": "¿Bloquear a @{{username}}? No veréis los eventos ni los comentarios del otro, y la amistad se termina.",
+    "notFound": "Esta persona no existe.",
+    "youAreFriends": "Sois amigos. Veis vuestros nombres de usuario reales en los eventos.",
+    "wantsToBeFriends": "Esta persona quiere ser tu amiga."
+  },
+  "forYou": {
+    "friendsWithRequests_one": "Amigos · {{count}} solicitud nueva",
+    "friendsWithRequests_other": "Amigos · {{count}} solicitudes nuevas",
+    "update": "Novedad de {{event}}",
+    "comment": "{{who}} comentó en {{event}}",
+    "going": "{{who}} va a {{event}}",
+    "interested": "A {{who}} le interesa {{event}}",
+    "empty": "Aún no hay nada. Añade amigos para ver qué hacen y responde a eventos para recibir novedades de sus organizadores."
   }
 }

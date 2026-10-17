@@ -10,6 +10,7 @@ import { Text, View } from '@/components/Themed';
 import { Button, Centered, Chip, Loading, Muted, useColors } from '@/components/ui';
 import { dateFilterRange, dateFilters, type DateFilter } from '@/lib/dates';
 import { useCurrentPosition } from '@/lib/location';
+import { useSettings } from '@/lib/settings';
 import { useAnswerEvent, useClearRsvp, useNearbyEvents } from '@/lib/queries';
 import { eventCategories, type EventCategory, type NearbyEvent } from '@/lib/types';
 
@@ -23,10 +24,12 @@ export default function NearbyScreen() {
   const { t } = useTranslation();
   const colors = useColors();
   const position = useCurrentPosition();
+  const { settings } = useSettings();
   const [mode, setMode] = useState<Mode>('cards');
-  // The label follows the slider while dragging; the search runs when it is released.
-  const [draftRadius, setDraftRadius] = useState(DEFAULT_RADIUS_KM);
-  const [radiusKm, setRadiusKm] = useState(DEFAULT_RADIUS_KM);
+  // Starts at the distance chosen in Settings. The label follows the slider while
+  // dragging; the search runs when it is released.
+  const [draftRadius, setDraftRadius] = useState(settings?.default_radius_km ?? DEFAULT_RADIUS_KM);
+  const [radiusKm, setRadiusKm] = useState(settings?.default_radius_km ?? DEFAULT_RADIUS_KM);
   const [dateFilter, setDateFilter] = useState<DateFilter>('any');
   const [categories, setCategories] = useState<EventCategory[]>([]);
   // Cards answered in this visit leave the deck straight away; the last one can be undone.

@@ -25,3 +25,7 @@ export const supabase = createClient<Database>(supabaseUrl, supabasePublishableK
 export function eventPhotoUrl(path: string) {
   return supabase.storage.from('event-photos').getPublicUrl(path).data.publicUrl;
 }
+
+export function avatarUrl(path: string) {
+  return supabase.storage.from('avatars').getPublicUrl(path).data.publicUrl;
+}
