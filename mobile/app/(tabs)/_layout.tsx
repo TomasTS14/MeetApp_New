@@ -1,5 +1,6 @@
 import { SymbolView, type SymbolViewProps } from 'expo-symbols';
 import { Tabs } from 'expo-router';
+import { useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import Colors from '@/constants/Colors';
@@ -10,6 +11,9 @@ function TabIcon({ name, color }: { name: SymbolViewProps['name']; color: Symbol
   return <SymbolView name={name} tintColor={color} size={26} />;
 }
 
+// From this width (desktop browsers, tablets) the tabs move into a sidebar on the left.
+const SIDEBAR_MIN_WIDTH = 768;
+
 export const unstable_settings = {
   anchor: 'for-you',
 };
@@ -17,11 +21,16 @@ export const unstable_settings = {
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { t } = useTranslation();
+  const { width } = useWindowDimensions();
+  const sidebar = width >= SIDEBAR_MIN_WIDTH;
 
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarPosition: sidebar ? 'left' : 'bottom',
+        tabBarVariant: sidebar ? 'material' : 'uikit',
+        tabBarLabelPosition: sidebar ? 'beside-icon' : 'below-icon',
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
