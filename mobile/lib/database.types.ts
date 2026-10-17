@@ -304,6 +304,9 @@ isOneToOne: false
               "author_avatar_path": string,"author_is_friend": boolean,"author_is_organizer": boolean,"author_is_verified": boolean,"author_name": string,"body": string,"created_at": string,"id": string,"is_deleted": boolean,"is_mine": boolean,"reply_to": string
             }[]
                            },
+"export_my_data":
+{ Args: Record<PropertyKey, never>; Returns: Json
+                           },
 "for_you_feed":
 { Args: { "p_before"?: string,"p_limit"?: number }; Returns: {
               "body": string,"event_id": string,"event_title": string,"friend_avatar_path": string,"friend_id": string,"friend_username": string,"kind": string,"occurred_at": string,"rsvp_status": Database["public"]['Enums']["rsvp_status"]

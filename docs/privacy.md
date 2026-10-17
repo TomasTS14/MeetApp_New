@@ -26,7 +26,7 @@ MeetApp's promise is that people can talk about events without being identifiabl
 
 12. **Data is hosted in an EU region.**
 13. **The verified badge is set by the ID verification provider only.** Users cannot set it, and MeetApp stores only the date of verification, never the ID document.
-14. **Deleting an account deletes everything about the person** (all tables cascade from the user). Data export arrives in phase 4.
+14. **Deleting an account deletes everything about the person.** Settings > Delete account calls the `delete-account` edge function, which removes their photos from storage and then the auth user; every table cascades from it. Settings > Download my data returns everything about the person as JSON (`export_my_data()`), without other people's data.
 15. **Minimum age is 14**, the age of digital consent in Spain. Sign-up asks for it in phase 1.
 
 ## Adding new tables
