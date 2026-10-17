@@ -244,6 +244,16 @@ otp_expiry = 3600
 # admin_email = "admin@email.com"
 # sender_name = "Admin"
 
+# MeetApp signs people in with a 6-digit code, so both emails show the code instead of a link.
+# The hosted project needs the same template under Authentication > Emails.
+[auth.email.template.magic_link]
+subject = "Your MeetApp code: {{ .Token }}"
+content_path = "./supabase/templates/sign_in_code.html"
+
+[auth.email.template.confirmation]
+subject = "Your MeetApp code: {{ .Token }}"
+content_path = "./supabase/templates/sign_in_code.html"
+
 # Uncomment to customize email template
 # [auth.email.template.invite]
 # subject = "You have been invited"
