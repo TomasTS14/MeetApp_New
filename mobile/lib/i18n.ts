@@ -9,8 +9,8 @@ export const supportedLanguages = ['en', 'es'] as const;
 export type Language = (typeof supportedLanguages)[number];
 
 // English is the primary language; Spanish is used when the device is set to Spanish.
-// The language picker in Settings will override this in a later phase.
-function deviceLanguage(): Language {
+// The language chosen in Settings overrides this once signed in (lib/settings.tsx).
+export function deviceLanguage(): Language {
   const code = getLocales()[0]?.languageCode;
   return code === 'es' ? 'es' : 'en';
 }
