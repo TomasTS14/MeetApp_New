@@ -42,6 +42,17 @@
         {
           "locationWhenInUsePermission": "MeetApp uses your location to show events near you. It is never stored on our servers."
         }
+      ],
+      "@react-native-community/datetimepicker",
+      "expo-secure-store",
+      "expo-image",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "MeetApp uses your photos so you can add them to events you organize.",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
       ]
     ],
     "experiments": {

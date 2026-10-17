@@ -3,17 +3,20 @@
 begin;
 select plan(38);
 
+-- Start from an empty database so local seed data does not change the counts below.
+delete from auth.users;
+
 -- Four people: Alice organizes, Bob, Carol and Dave take part.
 insert into auth.users (id, email) values
   ('00000000-0000-0000-0000-00000000000a', 'alice@example.com'),
   ('00000000-0000-0000-0000-00000000000b', 'bob@example.com'),
   ('00000000-0000-0000-0000-00000000000c', 'carol@example.com'),
   ('00000000-0000-0000-0000-00000000000d', 'dave@example.com');
-insert into public.profiles (id, username) values
-  ('00000000-0000-0000-0000-00000000000a', 'alice'),
-  ('00000000-0000-0000-0000-00000000000b', 'bob'),
-  ('00000000-0000-0000-0000-00000000000c', 'carol'),
-  ('00000000-0000-0000-0000-00000000000d', 'dave');
+insert into public.profiles (id, username, confirmed_minimum_age) values
+  ('00000000-0000-0000-0000-00000000000a', 'alice', true),
+  ('00000000-0000-0000-0000-00000000000b', 'bob', true),
+  ('00000000-0000-0000-0000-00000000000c', 'carol', true),
+  ('00000000-0000-0000-0000-00000000000d', 'dave', true);
 
 select is(
   (select count(*)::integer from public.user_settings),

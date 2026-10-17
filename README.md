@@ -8,7 +8,8 @@ Find events near you, say yes, and talk about them under a per-event alias. One 
 | --- | --- |
 | `mobile/` | The Expo (React Native) app: iOS, Android and web. Routes live in `mobile/app/`. |
 | `supabase/migrations/` | The database: tables, privacy rules and the functions the app calls. |
-| `supabase/tests/` | pgTAP tests for the privacy rules and the waitlist. |
+| `supabase/tests/` | pgTAP tests for the privacy rules, the waitlist, onboarding and photo uploads. |
+| `supabase/seed.sql` | Local test data: two organizers and six events in Valencia. |
 | `docs/privacy.md` | The privacy rules and where each one is enforced. |
 | `docs/screen-map.md` | Every screen, what it shows and which data it uses. |
 
@@ -27,6 +28,12 @@ cp .env.example .env   # paste the publishable key printed by `supabase status`
 npm install
 npm run web            # or: npx expo start, then scan the QR code with Expo Go
 ```
+
+Signing in locally: enter any email address, then open Mailpit at http://127.0.0.1:54324 to read the 6-digit code. The local database comes with six upcoming events around Valencia (`supabase/seed.sql`); if your browser has no location, Nearby uses Valencia's centre.
+
+After changing a migration, regenerate the app's database types with `npm run db:types` in `mobile/`.
+
+Sign-in emails use `supabase/templates/sign_in_code.html`. The hosted project needs the same template for the "Magic link" and "Confirm signup" emails (Authentication > Emails), so they show the code instead of a link.
 
 ## Checks
 

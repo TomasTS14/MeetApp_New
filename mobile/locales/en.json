@@ -33,5 +33,129 @@
     "title": "Not found",
     "message": "This screen doesn't exist.",
     "goHome": "Go to For you"
+  },
+  "common": {
+    "retry": "Try again",
+    "save": "Save",
+    "saved": "Saved",
+    "error": "Something went wrong. Please try again.",
+    "back": "Back"
+  },
+  "auth": {
+    "title": "Welcome to MeetApp",
+    "subtitle": "Find events near you and meet people there.",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "sendCode": "Send me a code",
+    "codeSentTo": "We sent a 6-digit code to {{email}}.",
+    "code": "Code",
+    "verify": "Sign in",
+    "changeEmail": "Use a different email",
+    "invalidEmail": "Enter a valid email address.",
+    "invalidCode": "That code didn't work. Check it or ask for a new one."
+  },
+  "onboarding": {
+    "title": "Choose your username",
+    "subtitle": "Friends see your username. Everyone else sees a different alias at each event.",
+    "username": "Username",
+    "usernameHint": "3 to 30 characters: lowercase letters, numbers, dots and underscores.",
+    "usernameInvalid": "Use 3 to 30 lowercase letters, numbers, dots or underscores.",
+    "usernameTaken": "That username is taken.",
+    "age": "I am 14 or older",
+    "ageRequired": "You need to be 14 or older to use MeetApp.",
+    "continue": "Continue"
+  },
+  "categories": {
+    "music": "Music",
+    "sport": "Sport",
+    "food": "Food",
+    "nightlife": "Nightlife",
+    "culture": "Culture",
+    "outdoors": "Outdoors",
+    "learning": "Learning",
+    "social": "Social",
+    "other": "Other"
+  },
+  "dates": {
+    "any": "Any time",
+    "today": "Today",
+    "weekend": "This weekend",
+    "week": "Next 7 days"
+  },
+  "nearby": {
+    "radius": "Within {{km}} km",
+    "locating": "Finding your location…",
+    "locationDenied": "Location is off, so you're seeing events around Valencia.",
+    "empty": "No events match. Try a larger distance or other dates.",
+    "distance": "{{km}} km away"
+  },
+  "event": {
+    "going": "{{count}} going",
+    "spotsLeft": "{{count}} spots left",
+    "full": "Full",
+    "waitlist": "{{count}} on the waitlist",
+    "organizer": "Organizer",
+    "verified": "Verified",
+    "friend": "Friend",
+    "yes": "Going",
+    "interested": "Interested",
+    "no": "Not going",
+    "waitlisted": "You're on the waitlist. You'll get a spot if someone drops out.",
+    "addressHidden": "The exact address appears once you say you're going.",
+    "youOrganize": "You organize this event.",
+    "cancel": "Cancel event",
+    "cancelConfirm": "Cancel this event? Everyone who answered will see it as cancelled.",
+    "cancelled": "This event was cancelled.",
+    "notFound": "This event doesn't exist or you can't see it.",
+    "comingSoon": "Comments and organizer updates arrive in phase 2."
+  },
+  "create": {
+    "title": "New event",
+    "name": "Title",
+    "description": "Description",
+    "category": "Category",
+    "starts": "Starts",
+    "ends": "Ends (optional)",
+    "maxParticipants": "Max participants",
+    "maxParticipantsHint": "Leave empty for no limit.",
+    "place": "Place",
+    "placeSearch": "Search for an address",
+    "noPlaceSearch": "Address search isn't set up yet, so the event is placed at your current location. Type the address people will see.",
+    "address": "Address",
+    "area": "Area",
+    "areaHint": "Shown before people say yes, for example: Russafa, Valencia",
+    "photos": "Photos",
+    "addPhoto": "Add photo",
+    "removePhoto": "Remove",
+    "submit": "Create event",
+    "titleShort": "The title needs at least 3 characters.",
+    "pickPlace": "Choose the place of the event.",
+    "addressRequired": "Enter the address and the area.",
+    "startInPast": "The start must be in the future.",
+    "endBeforeStart": "The end must be after the start.",
+    "maxInvalid": "Enter a whole number above 0, or leave it empty.",
+    "pickDate": "Choose date and time",
+    "clear": "Clear"
+  },
+  "myEvents": {
+    "organizing": "You organize",
+    "attending": "Going and interested",
+    "create": "Create event",
+    "empty": "Nothing here yet. Find something in Nearby or create your own event.",
+    "role": {
+      "organizer": "Organizer",
+      "yes": "Going",
+      "interested": "Interested",
+      "waitlisted": "Waitlist"
+    }
+  },
+  "profile": {
+    "bio": "About you",
+    "bioPlaceholder": "A short description",
+    "verified": "Verified"
+  },
+  "settings": {
+    "signOut": "Sign out",
+    "more": "Privacy, language, text size and theme settings arrive in phase 3."
   }
 }

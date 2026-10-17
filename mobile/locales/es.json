@@ -33,5 +33,129 @@
     "title": "No encontrado",
     "message": "Esta pantalla no existe.",
     "goHome": "Ir a Para ti"
+  },
+  "common": {
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "saved": "Guardado",
+    "error": "Algo ha fallado. Inténtalo de nuevo.",
+    "back": "Volver"
+  },
+  "auth": {
+    "title": "Bienvenido a MeetApp",
+    "subtitle": "Encuentra eventos cerca de ti y conoce gente allí.",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "sendCode": "Envíame un código",
+    "codeSentTo": "Hemos enviado un código de 6 dígitos a {{email}}.",
+    "code": "Código",
+    "verify": "Entrar",
+    "changeEmail": "Usar otro correo",
+    "invalidEmail": "Introduce un correo válido.",
+    "invalidCode": "Ese código no funciona. Revísalo o pide uno nuevo."
+  },
+  "onboarding": {
+    "title": "Elige tu nombre de usuario",
+    "subtitle": "Tus amigos ven tu nombre de usuario. Los demás ven un alias distinto en cada evento.",
+    "username": "Nombre de usuario",
+    "usernameHint": "De 3 a 30 caracteres: minúsculas, números, puntos y guiones bajos.",
+    "usernameInvalid": "Usa de 3 a 30 minúsculas, números, puntos o guiones bajos.",
+    "usernameTaken": "Ese nombre de usuario ya existe.",
+    "age": "Tengo 14 años o más",
+    "ageRequired": "Necesitas tener 14 años o más para usar MeetApp.",
+    "continue": "Continuar"
+  },
+  "categories": {
+    "music": "Música",
+    "sport": "Deporte",
+    "food": "Comida",
+    "nightlife": "Noche",
+    "culture": "Cultura",
+    "outdoors": "Aire libre",
+    "learning": "Aprender",
+    "social": "Social",
+    "other": "Otros"
+  },
+  "dates": {
+    "any": "Cualquier día",
+    "today": "Hoy",
+    "weekend": "Este fin de semana",
+    "week": "Próximos 7 días"
+  },
+  "nearby": {
+    "radius": "A menos de {{km}} km",
+    "locating": "Buscando tu ubicación…",
+    "locationDenied": "La ubicación está desactivada, así que ves eventos en Valencia.",
+    "empty": "No hay eventos. Prueba con más distancia u otras fechas.",
+    "distance": "A {{km}} km"
+  },
+  "event": {
+    "going": "{{count}} van",
+    "spotsLeft": "Quedan {{count}} plazas",
+    "full": "Completo",
+    "waitlist": "{{count}} en lista de espera",
+    "organizer": "Organizador",
+    "verified": "Verificado",
+    "friend": "Amigo",
+    "yes": "Voy",
+    "interested": "Me interesa",
+    "no": "No voy",
+    "waitlisted": "Estás en la lista de espera. Tendrás plaza si alguien se da de baja.",
+    "addressHidden": "La dirección exacta aparece cuando confirmas que vas.",
+    "youOrganize": "Tú organizas este evento.",
+    "cancel": "Cancelar evento",
+    "cancelConfirm": "¿Cancelar este evento? Todos los que respondieron lo verán cancelado.",
+    "cancelled": "Este evento se ha cancelado.",
+    "notFound": "Este evento no existe o no puedes verlo.",
+    "comingSoon": "Los comentarios y las novedades del organizador llegan en la fase 2."
+  },
+  "create": {
+    "title": "Nuevo evento",
+    "name": "Título",
+    "description": "Descripción",
+    "category": "Categoría",
+    "starts": "Empieza",
+    "ends": "Termina (opcional)",
+    "maxParticipants": "Máximo de participantes",
+    "maxParticipantsHint": "Déjalo vacío si no hay límite.",
+    "place": "Lugar",
+    "placeSearch": "Busca una dirección",
+    "noPlaceSearch": "La búsqueda de direcciones aún no está configurada, así que el evento se sitúa en tu ubicación actual. Escribe la dirección que verá la gente.",
+    "address": "Dirección",
+    "area": "Zona",
+    "areaHint": "Se muestra antes de que la gente diga que va, por ejemplo: Russafa, Valencia",
+    "photos": "Fotos",
+    "addPhoto": "Añadir foto",
+    "removePhoto": "Quitar",
+    "submit": "Crear evento",
+    "titleShort": "El título necesita al menos 3 caracteres.",
+    "pickPlace": "Elige el lugar del evento.",
+    "addressRequired": "Escribe la dirección y la zona.",
+    "startInPast": "El inicio tiene que ser en el futuro.",
+    "endBeforeStart": "El final tiene que ser después del inicio.",
+    "maxInvalid": "Escribe un número entero mayor que 0, o déjalo vacío.",
+    "pickDate": "Elige fecha y hora",
+    "clear": "Quitar"
+  },
+  "myEvents": {
+    "organizing": "Organizas",
+    "attending": "Vas o te interesa",
+    "create": "Crear evento",
+    "empty": "Aún no hay nada. Busca algo en Cerca o crea tu propio evento.",
+    "role": {
+      "organizer": "Organizador",
+      "yes": "Voy",
+      "interested": "Me interesa",
+      "waitlisted": "Lista de espera"
+    }
+  },
+  "profile": {
+    "bio": "Sobre ti",
+    "bioPlaceholder": "Una breve descripción",
+    "verified": "Verificado"
+  },
+  "settings": {
+    "signOut": "Cerrar sesión",
+    "more": "Los ajustes de privacidad, idioma, tamaño del texto y tema llegan en la fase 3."
   }
 }
