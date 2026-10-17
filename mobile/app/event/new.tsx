@@ -12,7 +12,7 @@ export default function NewEventScreen() {
     <EventForm
       submitLabel={t('create.submit')}
       busy={createEvent.isPending}
-      failed={createEvent.isError}
+      error={createEvent.error}
       onSubmit={(values) =>
         createEvent.mutate(
           { ...values, photos: values.newPhotos },

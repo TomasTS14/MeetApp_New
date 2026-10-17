@@ -22,6 +22,13 @@ MeetApp's promise is that people can talk about events without being identifiabl
 10. **Blocking cuts both ways.** A blocked pair cannot see each other's comments, the blocked person cannot open the blocker's events, and any friendship between them ends.
 11. **Users only see their own RSVPs.** Event pages show counts, never lists of attendees.
 
+## Reports and moderation
+
+16. **Reports go to MeetApp admins only.** The reported person is never told who reported them, and reporters only see their own reports.
+17. **Admins can see who wrote a reported comment.** Acting on abuse behind an alias needs it. `admin_reports()` returns the author only for reported items, only to admins (`private.admins`), and admins are added by hand in the SQL editor.
+18. **Banning goes through the `ban-user` edge function**, which looks the author up on the server and bans them in Supabase Auth, so they can no longer sign in.
+19. **Rate limits** refuse more than 10 comments a minute (200 a day), 30 friend requests, 20 reports and 10 new events a day, and 10 organizer updates an hour, per person.
+
 ## Accounts and data (GDPR, Spain)
 
 12. **Data is hosted in an EU region.**

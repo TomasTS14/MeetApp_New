@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import { ReportButton } from '@/components/ReportButton';
 import { Text, View } from '@/components/Themed';
 import { Button, Muted, TextField, useColors } from '@/components/ui';
 import { formatRelative } from '@/lib/dates';
+import { errorText } from '@/lib/errors';
 import { useDeleteComment, useEventComments, usePostComment } from '@/lib/queries';
 import type { EventComment } from '@/lib/types';
 
@@ -67,7 +69,7 @@ export function EventComments({ eventId, isOrganizer }: Props) {
           multiline
           maxLength={2000}
           style={styles.input}
-          error={postComment.isError ? t('common.error') : null}
+          error={postComment.isError ? errorText(t, postComment.error) : null}
         />
         <Button
           label={t('comments.post')}
@@ -136,6 +138,9 @@ function CommentRow({ comment, isReply, canDelete, onReply, onDelete }: RowProps
           <Pressable accessibilityRole="button" onPress={onDelete}>
             <Text style={[styles.small, { color: colors.danger }]}>{t('comments.delete')}</Text>
           </Pressable>
+        )}
+        {!comment.is_mine && !comment.is_deleted && (
+          <ReportButton targetType="comment" targetId={comment.id} textStyle={styles.small} />
         )}
       </View>
     </View>

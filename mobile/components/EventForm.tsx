@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { DateTimeField } from '@/components/DateTimeField';
 import { Text, View } from '@/components/Themed';
 import { Button, Chip, FieldLabel, Muted, TextField, useColors } from '@/components/ui';
+import { errorText } from '@/lib/errors';
 import { useCurrentPosition } from '@/lib/location';
 import { placeSearchAvailable, searchPlaces, type Place } from '@/lib/places';
 import type { NewPhoto } from '@/lib/queries';
@@ -39,7 +40,8 @@ type Props = {
   initial?: EventFormInitial;
   submitLabel: string;
   busy: boolean;
-  failed: boolean;
+  // The error from the last save, if it failed.
+  error: unknown;
   onSubmit: (values: EventFormValues) => void;
 };
 
@@ -51,7 +53,7 @@ function defaultStart() {
   return date;
 }
 
-export function EventForm({ initial, submitLabel, busy, failed, onSubmit }: Props) {
+export function EventForm({ initial, submitLabel, busy, error, onSubmit }: Props) {
   const { t, i18n } = useTranslation();
   const colors = useColors();
   const position = useCurrentPosition();
@@ -270,7 +272,7 @@ export function EventForm({ initial, submitLabel, busy, failed, onSubmit }: Prop
           {photoCount < MAX_PHOTOS && <Button label={t('create.addPhoto')} variant="secondary" onPress={pickPhotos} />}
         </View>
 
-        {failed && <Text style={{ color: colors.danger }}>{t('common.error')}</Text>}
+        {!!error && <Text style={{ color: colors.danger }}>{errorText(t, error)}</Text>}
         <Button label={submitLabel} onPress={submit} loading={busy} disabled={!near && !place} />
       </ScrollView>
     </KeyboardAvoidingView>

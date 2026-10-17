@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { EVENT_PHOTO_MAX_SIDE, shrinkPhoto } from '@/lib/photos';
 import { supabase } from '@/lib/supabase';
 import type { EventCategory, EventComment, EventDetails, MyEvent, NearbyEvent, RsvpStatus } from '@/lib/types';
 
@@ -126,10 +127,10 @@ export type NewPhoto = { uri: string; mimeType: string };
 async function uploadPhotos(eventId: string, photos: NewPhoto[], positions: number[]) {
   for (const [index, photo] of photos.entries()) {
     const position = positions[index];
-    const body = await (await fetch(photo.uri)).arrayBuffer();
-    const extension = photo.mimeType.split('/')[1] ?? 'jpg';
-    const path = `${eventId}/${position}-${Date.now()}.${extension}`;
-    const upload = await supabase.storage.from('event-photos').upload(path, body, { contentType: photo.mimeType });
+    const small = await shrinkPhoto(photo.uri, EVENT_PHOTO_MAX_SIDE);
+    const body = await (await fetch(small.uri)).arrayBuffer();
+    const path = `${eventId}/${position}-${Date.now()}.jpg`;
+    const upload = await supabase.storage.from('event-photos').upload(path, body, { contentType: small.mimeType });
     if (upload.error) throw upload.error;
     const row = await supabase.from('event_photos').insert({ event_id: eventId, storage_path: path, position });
     if (row.error) throw row.error;

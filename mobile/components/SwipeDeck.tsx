@@ -2,7 +2,14 @@ import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, useWindowDimensions } from 'react-native';
 import { GestureDetector, usePanGesture } from 'react-native-gesture-handler';
-import Animated, { interpolate, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useReducedMotion,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 
 import { Text, View } from '@/components/Themed';
@@ -27,6 +34,9 @@ function SwipeCard({ event, onAnswer, onOpen }: CardProps) {
   const { t, i18n } = useTranslation();
   const colors = useColors();
   const { width } = useWindowDimensions();
+  // With "reduce motion" on, the springs and fly-outs finish at once (Reanimated follows
+  // the system setting) and the card stays upright while dragged.
+  const reduceMotion = useReducedMotion();
   const x = useSharedValue(0);
   const y = useSharedValue(0);
 
@@ -65,7 +75,7 @@ function SwipeCard({ event, onAnswer, onOpen }: CardProps) {
     transform: [
       { translateX: x.value },
       { translateY: y.value },
-      { rotate: `${interpolate(x.value, [-width, width], [-12, 12])}deg` },
+      { rotate: reduceMotion ? '0deg' : `${interpolate(x.value, [-width, width], [-12, 12])}deg` },
     ],
   }));
   const yesStyle = useAnimatedStyle(() => ({ opacity: interpolate(x.value, [0, SWIPE_THRESHOLD], [0, 1], 'clamp') }));

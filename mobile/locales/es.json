@@ -16,7 +16,8 @@
     "save": "Guardar",
     "saved": "Guardado",
     "error": "Algo ha fallado. Inténtalo de nuevo.",
-    "back": "Volver"
+    "back": "Volver",
+    "tooOften": "Lo estás haciendo demasiado a menudo. Espera un poco y vuelve a intentarlo."
   },
   "auth": {
     "title": "Bienvenido a MeetApp",
@@ -222,7 +223,8 @@
     "blockConfirm": "¿Bloquear a @{{username}}? No veréis los eventos ni los comentarios del otro, y la amistad se termina.",
     "notFound": "Esta persona no existe.",
     "youAreFriends": "Sois amigos. Veis vuestros nombres de usuario reales en los eventos.",
-    "wantsToBeFriends": "Esta persona quiere ser tu amiga."
+    "wantsToBeFriends": "Esta persona quiere ser tu amiga.",
+    "tryLater": "Inténtalo más tarde"
   },
   "forYou": {
     "friendsWithRequests_one": "Amigos · {{count}} solicitud nueva",
@@ -251,5 +253,47 @@
       "too_many_songs": "Ya tienes 10 canciones. Quita una para añadir otra.",
       "other": "No se ha podido añadir la canción. Inténtalo de nuevo."
     }
+  },
+  "report": {
+    "action": "Denunciar",
+    "comment": "Denunciar comentario",
+    "event_update": "Denunciar novedad",
+    "event": "Denunciar evento",
+    "user": "Denunciar persona",
+    "hint": "Cuéntanos qué pasa. El equipo de MeetApp revisa cada denuncia; la persona denunciada no sabe quién la envió.",
+    "reasons": {
+      "spam": "Spam o estafa",
+      "harassment": "Acoso u odio",
+      "inappropriate": "Contenido sexual o violento",
+      "dangerous": "Peligroso o ilegal",
+      "other": "Otra cosa"
+    },
+    "details": "Detalles (opcional)",
+    "send": "Enviar denuncia",
+    "thanks": "Gracias por avisar",
+    "thanksHint": "El equipo de MeetApp lo revisará. También puedes bloquear a la persona desde su perfil.",
+    "done": "Listo"
+  },
+  "admin": {
+    "open": "Denuncias por revisar",
+    "title": "Denuncias",
+    "notAdmin": "Solo los administradores de MeetApp pueden ver esto.",
+    "empty": "No hay denuncias abiertas.",
+    "types": {
+      "comment": "Comentario",
+      "event_update": "Novedad del organizador",
+      "event": "Evento",
+      "user": "Persona"
+    },
+    "reports_one": "{{count}} denuncia",
+    "reports_other": "{{count}} denuncias",
+    "gone": "Ya eliminado",
+    "by": "De",
+    "banned": "bloqueada",
+    "dismiss": "Descartar",
+    "remove": "Eliminar",
+    "ban": "Expulsar",
+    "removeAndBan": "Eliminar y expulsar",
+    "confirmBan": "Toca otra vez para expulsar a @{{username}}"
   }
 }

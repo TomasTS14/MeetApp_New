@@ -76,6 +76,7 @@ function RootStack() {
         <Stack.Screen name="event/edit/[id]" options={{ title: t('edit.title'), presentation: 'modal' }} />
         <Stack.Screen name="friends" options={{ title: t('friends.title') }} />
         <Stack.Screen name="user/[username]" options={{ title: '' }} />
+        <Stack.Screen name="admin" options={{ title: t('admin.title') }} />
       </Stack.Protected>
     </Stack>
   );

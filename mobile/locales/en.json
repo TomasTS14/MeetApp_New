@@ -16,7 +16,8 @@
     "save": "Save",
     "saved": "Saved",
     "error": "Something went wrong. Please try again.",
-    "back": "Back"
+    "back": "Back",
+    "tooOften": "You're doing that too often. Please wait a little and try again."
   },
   "auth": {
     "title": "Welcome to MeetApp",
@@ -222,7 +223,8 @@
     "blockConfirm": "Block @{{username}}? You won't see each other's events or comments, and any friendship ends.",
     "notFound": "This person doesn't exist.",
     "youAreFriends": "You are friends. You see each other's real usernames at events.",
-    "wantsToBeFriends": "This person wants to be your friend."
+    "wantsToBeFriends": "This person wants to be your friend.",
+    "tryLater": "Try again later"
   },
   "forYou": {
     "friendsWithRequests_one": "Friends · {{count}} new request",
@@ -251,5 +253,47 @@
       "too_many_songs": "You already have 10 songs. Remove one to add another.",
       "other": "Couldn't add the song. Please try again."
     }
+  },
+  "report": {
+    "action": "Report",
+    "comment": "Report comment",
+    "event_update": "Report update",
+    "event": "Report event",
+    "user": "Report person",
+    "hint": "Tell us what's wrong. The MeetApp team reviews every report; the person you report is not told who sent it.",
+    "reasons": {
+      "spam": "Spam or scam",
+      "harassment": "Harassment or hate",
+      "inappropriate": "Sexual or violent content",
+      "dangerous": "Dangerous or illegal",
+      "other": "Something else"
+    },
+    "details": "Details (optional)",
+    "send": "Send report",
+    "thanks": "Thanks for reporting",
+    "thanksHint": "The MeetApp team will review it. You can also block the person from their profile.",
+    "done": "Done"
+  },
+  "admin": {
+    "open": "Reports to review",
+    "title": "Reports",
+    "notAdmin": "Only MeetApp admins can see this.",
+    "empty": "No open reports. Nice.",
+    "types": {
+      "comment": "Comment",
+      "event_update": "Organizer update",
+      "event": "Event",
+      "user": "Person"
+    },
+    "reports_one": "{{count}} report",
+    "reports_other": "{{count}} reports",
+    "gone": "Already deleted",
+    "by": "By",
+    "banned": "banned",
+    "dismiss": "Dismiss",
+    "remove": "Remove",
+    "ban": "Ban",
+    "removeAndBan": "Remove and ban",
+    "confirmBan": "Tap again to ban @{{username}}"
   }
 }

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import { EventComments } from '@/components/EventComments';
 import { EventUpdates } from '@/components/EventUpdates';
+import { ReportButton } from '@/components/ReportButton';
 import { Text, View } from '@/components/Themed';
 import { Button, Centered, Loading, Muted, useColors } from '@/components/ui';
 import { addToCalendar } from '@/lib/calendar';
@@ -184,6 +185,7 @@ export default function EventScreen() {
 
           <EventUpdates eventId={id} isOrganizer={e.is_organizer} />
           <EventComments eventId={id} isOrganizer={e.is_organizer} />
+          {!e.is_organizer && <ReportButton targetType="event" targetId={id} look="button" />}
         </View>
       </ScrollView>
     </>

@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import { ReportButton } from '@/components/ReportButton';
 import { Text, View } from '@/components/Themed';
 import { Button, Muted, TextField, useColors } from '@/components/ui';
 import { formatRelative } from '@/lib/dates';
+import { errorText } from '@/lib/errors';
 import { useDeleteUpdate, useEventUpdates, usePostUpdate } from '@/lib/queries';
 
 type Props = { eventId: string; isOrganizer: boolean };
@@ -34,6 +36,7 @@ export function EventUpdates({ eventId, isOrganizer }: Props) {
             multiline
             maxLength={4000}
             style={styles.input}
+            error={postUpdate.isError ? errorText(t, postUpdate.error) : null}
           />
           <Button
             label={t('updates.post')}
@@ -48,10 +51,12 @@ export function EventUpdates({ eventId, isOrganizer }: Props) {
           <Text style={styles.body}>{update.body}</Text>
           <View style={[styles.meta, { backgroundColor: colors.card }]}>
             <Muted style={styles.time}>{formatRelative(update.created_at, i18n.language)}</Muted>
-            {isOrganizer && (
+            {isOrganizer ? (
               <Pressable accessibilityRole="button" onPress={() => deleteUpdate.mutate(update.id)}>
                 <Text style={[styles.time, { color: colors.danger }]}>{t('comments.delete')}</Text>
               </Pressable>
+            ) : (
+              <ReportButton targetType="event_update" targetId={update.id} textStyle={styles.time} />
             )}
           </View>
         </View>
