@@ -1,8 +1,10 @@
 import { Image } from 'expo-image';
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { Alert, Platform, ScrollView, StyleSheet, useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import { EventComments } from '@/components/EventComments';
+import { EventUpdates } from '@/components/EventUpdates';
 import { Text, View } from '@/components/Themed';
 import { Button, Centered, Loading, Muted, useColors } from '@/components/ui';
 import { formatEventDate } from '@/lib/dates';
@@ -114,6 +116,13 @@ export default function EventScreen() {
               <Muted>{t('event.youOrganize')}</Muted>
               {!cancelled && (
                 <Button
+                  label={t('edit.title')}
+                  variant="secondary"
+                  onPress={() => router.push({ pathname: '/event/edit/[id]', params: { id } })}
+                />
+              )}
+              {!cancelled && (
+                <Button
                   label={t('event.cancel')}
                   variant="danger"
                   loading={cancelEvent.isPending}
@@ -142,7 +151,8 @@ export default function EventScreen() {
             )
           )}
 
-          <Muted style={styles.soon}>{t('event.comingSoon')}</Muted>
+          <EventUpdates eventId={id} isOrganizer={e.is_organizer} />
+          <EventComments eventId={id} isOrganizer={e.is_organizer} />
         </View>
       </ScrollView>
     </>
@@ -183,5 +193,4 @@ const styles = StyleSheet.create({
   actions: { gap: 10 },
   answerRow: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
   answer: { flexGrow: 1 },
-  soon: { fontSize: 13, textAlign: 'center', marginTop: 8 },
 });

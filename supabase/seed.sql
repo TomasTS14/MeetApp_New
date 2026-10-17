@@ -2,15 +2,18 @@
 -- Two organizers and a handful of upcoming events around Valencia, dated relative to
 -- the moment the seed runs so they are always in the future.
 
+-- Supabase Auth expects the token columns to be empty strings rather than null, or signing
+-- in as these people fails.
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
-                        created_at, updated_at, raw_app_meta_data, raw_user_meta_data)
+                        created_at, updated_at, raw_app_meta_data, raw_user_meta_data,
+                        confirmation_token, recovery_token, email_change_token_new, email_change)
 values
   ('00000000-0000-0000-0000-000000000000', '11111111-1111-1111-1111-111111111111', 'authenticated',
    'authenticated', 'lucia@example.com', '', now(), now(), now(),
-   '{"provider":"email","providers":["email"]}', '{}'),
+   '{"provider":"email","providers":["email"]}', '{}', '', '', '', ''),
   ('00000000-0000-0000-0000-000000000000', '22222222-2222-2222-2222-222222222222', 'authenticated',
    'authenticated', 'marc@example.com', '', now(), now(), now(),
-   '{"provider":"email","providers":["email"]}', '{}');
+   '{"provider":"email","providers":["email"]}', '{}', '', '', '', '');
 
 insert into public.profiles (id, username, bio, confirmed_minimum_age, id_verified_at) values
   ('11111111-1111-1111-1111-111111111111', 'lucia', 'Paella, jazz and long walks by the Turia.', true, now()),
