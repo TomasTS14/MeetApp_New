@@ -1,0 +1,37 @@
+{
+  "tabs": {
+    "profile": "Profile",
+    "forYou": "For you",
+    "events": "Your events",
+    "nearby": "Nearby",
+    "settings": "Settings"
+  },
+  "screens": {
+    "profile": {
+      "title": "Your profile",
+      "description": "Your photo, a short description and your favourite songs from Spotify."
+    },
+    "forYou": {
+      "title": "For you",
+      "description": "What your friends are up to, and updates from events you are going to or interested in."
+    },
+    "events": {
+      "title": "Your events",
+      "description": "Events you organize, and events you said yes or interested to."
+    },
+    "nearby": {
+      "title": "Nearby events",
+      "description": "Swipe through events around you. Choose how far to look with the distance slider."
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Privacy, language, text size and theme."
+    }
+  },
+  "comingSoon": "Coming in phase {{phase}}",
+  "notFound": {
+    "title": "Not found",
+    "message": "This screen doesn't exist.",
+    "goHome": "Go to For you"
+  }
+}

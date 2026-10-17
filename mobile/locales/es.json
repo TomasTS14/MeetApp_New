@@ -1,0 +1,37 @@
+{
+  "tabs": {
+    "profile": "Perfil",
+    "forYou": "Para ti",
+    "events": "Tus eventos",
+    "nearby": "Cerca",
+    "settings": "Ajustes"
+  },
+  "screens": {
+    "profile": {
+      "title": "Tu perfil",
+      "description": "Tu foto, una breve descripción y tus canciones favoritas de Spotify."
+    },
+    "forYou": {
+      "title": "Para ti",
+      "description": "Lo que hacen tus amigos y las novedades de los eventos a los que vas o que te interesan."
+    },
+    "events": {
+      "title": "Tus eventos",
+      "description": "Los eventos que organizas y aquellos a los que dijiste sí o me interesa."
+    },
+    "nearby": {
+      "title": "Eventos cerca",
+      "description": "Desliza entre los eventos de tu zona. Elige hasta dónde buscar con el control de distancia."
+    },
+    "settings": {
+      "title": "Ajustes",
+      "description": "Privacidad, idioma, tamaño del texto y tema."
+    }
+  },
+  "comingSoon": "Llega en la fase {{phase}}",
+  "notFound": {
+    "title": "No encontrado",
+    "message": "Esta pantalla no existe.",
+    "goHome": "Ir a Para ti"
+  }
+}

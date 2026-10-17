@@ -1,0 +1,2 @@
+-- Local development data, loaded by `supabase start` and `supabase db reset`.
+-- Sample Valencia events arrive with phase 1.
