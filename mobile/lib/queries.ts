@@ -33,9 +33,10 @@ export function useNearbyEvents(filters: NearbyFilters | null) {
   });
 }
 
-export function useEvent(eventId: string) {
+export function useEvent(eventId: string, enabled = true) {
   return useQuery({
     queryKey: ['event', eventId],
+    enabled,
     queryFn: async () => {
       const { data, error } = await supabase.rpc('get_event', { p_event: eventId });
       if (error) throw error;

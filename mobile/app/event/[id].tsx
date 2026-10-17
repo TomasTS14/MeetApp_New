@@ -38,12 +38,14 @@ export default function EventScreen() {
   const { t, i18n } = useTranslation();
   const colors = useColors();
   const { width } = useWindowDimensions();
-  const event = useEvent(id);
+  const acceptInvite = useAcceptInvite(id);
+  const { mutate: accept } = acceptInvite;
+  // With an invite link, load the event only once the invite is accepted. A load started
+  // alongside it can finish first and cache "not found".
+  const event = useEvent(id, !invite || acceptInvite.isSuccess || acceptInvite.isError);
   const setRsvp = useSetRsvp(id);
   const cancelEvent = useCancelEvent(id);
   const [shareNote, setShareNote] = useState<'copied' | 'failed' | null>(null);
-  const acceptInvite = useAcceptInvite(id);
-  const { mutate: accept } = acceptInvite;
 
   useEffect(() => {
     clearPendingLink();
