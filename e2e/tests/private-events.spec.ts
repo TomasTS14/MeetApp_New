@@ -64,7 +64,8 @@ test('private events are seen only by invited people, and invite links survive s
     await carl.getByText('Sign in or create an account to see the event').waitFor();
     await enterCode(carl, `carl${s}@example.com`);
     await finishProfile(carl, 'carl_' + s);
-    await carl.getByText(title).first().waitFor({ timeout: 30_000 });
+    await expect(carl).toHaveURL(new RegExp(`/event/${eventId}`), { timeout: 30_000 });
+    await carl.getByText(title).first().waitFor();
     await carl.getByText('Interested', { exact: true }).locator('visible=true').click();
     await sleep(800);
   });

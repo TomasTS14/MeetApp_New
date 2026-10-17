@@ -75,8 +75,11 @@ jobs:
           cat "$RUNNER_TEMP/functions.log"; exit 1
       - run: npx playwright test
         working-directory: e2e
-      - if: failure()
-        run: cp "$RUNNER_TEMP/functions.log" e2e/test-results/ 2>/dev/null || true
+      - name: Show what failing pages looked like
+        if: failure()
+        run: |
+          cp "$RUNNER_TEMP/functions.log" e2e/test-results/ 2>/dev/null || true
+          for f in e2e/test-results/*/error-context.md; do echo "== $f"; cat "$f"; done
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
