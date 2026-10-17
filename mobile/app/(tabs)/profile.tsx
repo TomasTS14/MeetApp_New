@@ -6,13 +6,14 @@ import { Pressable, ScrollView, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { Avatar } from '@/components/Avatar';
+import { ProfileSongs } from '@/components/ProfileSongs';
 import { Text, View } from '@/components/Themed';
-import { Button, Muted, TextField, useColors } from '@/components/ui';
+import { Button, TextField, useColors } from '@/components/ui';
 import { profileQueryKey, useAuth } from '@/lib/auth';
 import { useFriends, useUploadAvatar } from '@/lib/social';
 import { supabase } from '@/lib/supabase';
 
-// Photo, username, bio and friends. Spotify songs come in phase 4.
+// Photo, username, bio, friends and favourite Spotify songs.
 export default function ProfileScreen() {
   const { t } = useTranslation();
   const colors = useColors();
@@ -93,7 +94,7 @@ export default function ProfileScreen() {
         loading={saveBio.isPending}
         disabled={bio.trim() === profile.bio}
       />
-      <Muted>{t('profile.songsSoon')}</Muted>
+      <ProfileSongs profileId={profile.id} editable />
     </ScrollView>
   );
 }

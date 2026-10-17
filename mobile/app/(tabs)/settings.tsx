@@ -1,10 +1,12 @@
 import { useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 import { ScrollView, StyleSheet, Switch } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { PersonRow } from '@/components/PersonRow';
 import { Text, View } from '@/components/Themed';
 import { Button, Chip, Loading, Muted, useColors } from '@/components/ui';
+import { useDeleteAccount, useExportData } from '@/lib/account';
 import { useSettings, useUpdateSettings, type Settings } from '@/lib/settings';
 import { useBlocks, useUnblock } from '@/lib/social';
 import { supabase } from '@/lib/supabase';
@@ -25,6 +27,9 @@ export default function SettingsScreen() {
   const update = useUpdateSettings();
   const blocks = useBlocks();
   const unblock = useUnblock();
+  const exportData = useExportData();
+  const deleteAccount = useDeleteAccount();
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
 
   const signOut = async () => {
     await supabase.auth.signOut();
@@ -128,6 +133,44 @@ export default function SettingsScreen() {
         ))}
       </View>
 
+      <View style={styles.section}>
+        <Text style={styles.heading}>{t('settings.yourData')}</Text>
+        <Muted style={styles.hint}>{t('settings.exportHint')}</Muted>
+        <Button
+          label={t('settings.export')}
+          variant="secondary"
+          onPress={() => exportData.mutate()}
+          loading={exportData.isPending}
+        />
+        {exportData.isError && <Text style={{ color: colors.danger }}>{t('common.error')}</Text>}
+
+        {confirmingDelete ? (
+          <View style={[styles.danger, { borderColor: colors.danger }]}>
+            <Text style={styles.label}>{t('settings.deleteConfirm')}</Text>
+            <Muted style={styles.hint}>{t('settings.deleteConfirmHint')}</Muted>
+            <View style={styles.chips}>
+              <Button
+                label={t('common.back')}
+                variant="secondary"
+                onPress={() => setConfirmingDelete(false)}
+                disabled={deleteAccount.isPending}
+                style={styles.grow}
+              />
+              <Button
+                label={t('settings.deleteForGood')}
+                variant="danger"
+                onPress={() => deleteAccount.mutate()}
+                loading={deleteAccount.isPending}
+                style={styles.grow}
+              />
+            </View>
+            {deleteAccount.isError && <Text style={{ color: colors.danger }}>{t('common.error')}</Text>}
+          </View>
+        ) : (
+          <Button label={t('settings.delete')} variant="danger" onPress={() => setConfirmingDelete(true)} />
+        )}
+      </View>
+
       <Button label={t('settings.signOut')} variant="secondary" onPress={signOut} />
     </ScrollView>
   );
@@ -143,4 +186,6 @@ const styles = StyleSheet.create({
   label: { fontSize: 16 },
   hint: { fontSize: 13 },
   compact: { minHeight: 36, paddingHorizontal: 14 },
+  danger: { borderWidth: 1, borderRadius: 12, padding: 14, gap: 10 },
+  grow: { flexGrow: 1 },
 });

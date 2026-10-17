@@ -1,5 +1,6 @@
 import { Image } from 'expo-image';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
+import { useState } from 'react';
 import { Alert, Platform, ScrollView, StyleSheet, useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -7,8 +8,10 @@ import { EventComments } from '@/components/EventComments';
 import { EventUpdates } from '@/components/EventUpdates';
 import { Text, View } from '@/components/Themed';
 import { Button, Centered, Loading, Muted, useColors } from '@/components/ui';
+import { addToCalendar } from '@/lib/calendar';
 import { formatEventDate } from '@/lib/dates';
 import { useCancelEvent, useEvent, useSetRsvp } from '@/lib/queries';
+import { shareEvent } from '@/lib/share';
 import { eventPhotoUrl } from '@/lib/supabase';
 import type { RsvpStatus } from '@/lib/types';
 
@@ -33,6 +36,7 @@ export default function EventScreen() {
   const event = useEvent(id);
   const setRsvp = useSetRsvp(id);
   const cancelEvent = useCancelEvent(id);
+  const [shareNote, setShareNote] = useState<'copied' | 'failed' | null>(null);
 
   if (event.isPending) return <Loading />;
   if (event.isError) {
@@ -57,6 +61,24 @@ export default function EventScreen() {
   const photoWidth = Math.min(width, 720);
   // While waitlisted, the "Going" button stays selected: the person asked for a spot.
   const selected = e.my_rsvp === 'waitlisted' ? 'yes' : e.my_rsvp;
+
+  const share = async () => {
+    setShareNote(null);
+    try {
+      const result = await shareEvent(id, e.title);
+      if (result === 'copied') setShareNote('copied');
+    } catch {
+      setShareNote('failed');
+    }
+  };
+  const calendar = async () => {
+    setShareNote(null);
+    try {
+      await addToCalendar({ ...e, id });
+    } catch {
+      setShareNote('failed');
+    }
+  };
 
   return (
     <>
@@ -97,6 +119,15 @@ export default function EventScreen() {
                 .join(' · ')}
             </Text>
           </View>
+
+          {!cancelled && (
+            <View style={styles.shareRow}>
+              <Button label={t('event.share')} variant="secondary" onPress={share} style={styles.answer} />
+              <Button label={t('event.addToCalendar')} variant="secondary" onPress={calendar} style={styles.answer} />
+            </View>
+          )}
+          {shareNote === 'copied' && <Muted>{t('event.linkCopied')}</Muted>}
+          {shareNote === 'failed' && <Text style={{ color: colors.danger }}>{t('common.error')}</Text>}
 
           <View style={[styles.organizer, { borderColor: colors.border }]}>
             <Muted>{t('event.organizer')}</Muted>
@@ -193,4 +224,5 @@ const styles = StyleSheet.create({
   actions: { gap: 10 },
   answerRow: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
   answer: { flexGrow: 1 },
+  shareRow: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
 });

@@ -92,7 +92,10 @@
     "cancel": "Cancel event",
     "cancelConfirm": "Cancel this event? Everyone who answered will see it as cancelled.",
     "cancelled": "This event was cancelled.",
-    "notFound": "This event doesn't exist or you can't see it."
+    "notFound": "This event doesn't exist or you can't see it.",
+    "share": "Share",
+    "addToCalendar": "Add to calendar",
+    "linkCopied": "Link copied."
   },
   "create": {
     "title": "New event",
@@ -142,7 +145,6 @@
     "uploading": "Uploading…",
     "friends_one": "{{count}} friend",
     "friends_other": "{{count}} friends",
-    "songsSoon": "Your favourite Spotify songs come in the next phase.",
     "edit": "Edit your profile"
   },
   "settings": {
@@ -168,7 +170,14 @@
     "shareAttendance": "Show events I'm going to",
     "shareAttendanceHint": "Friends see the events you answered going or interested in their For you feed.",
     "blocked": "Blocked people",
-    "noBlocked": "You haven't blocked anyone."
+    "noBlocked": "You haven't blocked anyone.",
+    "yourData": "Your data",
+    "exportHint": "Download a copy of everything MeetApp holds about you: profile, songs, friends, events, answers and comments.",
+    "export": "Download my data",
+    "delete": "Delete account",
+    "deleteConfirm": "Delete your account for good?",
+    "deleteConfirmHint": "Your profile, photos, songs, friends, answers and comments are deleted, and so are the events you organize. This can't be undone.",
+    "deleteForGood": "Delete for good"
   },
   "edit": {
     "title": "Edit event",
@@ -223,5 +232,24 @@
     "going": "{{who}} is going to {{event}}",
     "interested": "{{who}} is interested in {{event}}",
     "empty": "Nothing here yet. Add friends to see what they're up to, and answer events to get updates from their organizers."
+  },
+  "songs": {
+    "title": "Favourite songs",
+    "count": "{{count}} of {{max}}",
+    "untitled": "Spotify song",
+    "play": "Play {{title}}",
+    "hidePlayer": "Hide the player for {{title}}",
+    "remove": "Remove",
+    "empty": "Add up to 10 songs from Spotify so people get a feel for your music.",
+    "addLabel": "Add a song",
+    "addHint": "In Spotify, tap Share, then Copy song link, and paste it here.",
+    "add": "Add song",
+    "errors": {
+      "not_a_track": "That isn't a Spotify song link. It should start with https://open.spotify.com/track/.",
+      "song_not_found": "Spotify couldn't find that song.",
+      "already_added": "That song is already on your profile.",
+      "too_many_songs": "You already have 10 songs. Remove one to add another.",
+      "other": "Couldn't add the song. Please try again."
+    }
   }
 }

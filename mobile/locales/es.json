@@ -92,7 +92,10 @@
     "cancel": "Cancelar evento",
     "cancelConfirm": "¿Cancelar este evento? Todos los que respondieron lo verán cancelado.",
     "cancelled": "Este evento se ha cancelado.",
-    "notFound": "Este evento no existe o no puedes verlo."
+    "notFound": "Este evento no existe o no puedes verlo.",
+    "share": "Compartir",
+    "addToCalendar": "Añadir al calendario",
+    "linkCopied": "Enlace copiado."
   },
   "create": {
     "title": "Nuevo evento",
@@ -142,7 +145,6 @@
     "uploading": "Subiendo…",
     "friends_one": "{{count}} amigo",
     "friends_other": "{{count}} amigos",
-    "songsSoon": "Tus canciones favoritas de Spotify llegan en la siguiente fase.",
     "edit": "Editar tu perfil"
   },
   "settings": {
@@ -168,7 +170,14 @@
     "shareAttendance": "Mostrar los eventos a los que voy",
     "shareAttendanceHint": "Tus amigos ven en su Para ti los eventos a los que vas o te interesan.",
     "blocked": "Personas bloqueadas",
-    "noBlocked": "No has bloqueado a nadie."
+    "noBlocked": "No has bloqueado a nadie.",
+    "yourData": "Tus datos",
+    "exportHint": "Descarga una copia de todo lo que MeetApp guarda sobre ti: perfil, canciones, amigos, eventos, respuestas y comentarios.",
+    "export": "Descargar mis datos",
+    "delete": "Eliminar cuenta",
+    "deleteConfirm": "¿Eliminar tu cuenta para siempre?",
+    "deleteConfirmHint": "Se eliminan tu perfil, fotos, canciones, amigos, respuestas y comentarios, y también los eventos que organizas. No se puede deshacer.",
+    "deleteForGood": "Eliminar para siempre"
   },
   "edit": {
     "title": "Editar evento",
@@ -223,5 +232,24 @@
     "going": "{{who}} va a {{event}}",
     "interested": "A {{who}} le interesa {{event}}",
     "empty": "Aún no hay nada. Añade amigos para ver qué hacen y responde a eventos para recibir novedades de sus organizadores."
+  },
+  "songs": {
+    "title": "Canciones favoritas",
+    "count": "{{count}} de {{max}}",
+    "untitled": "Canción de Spotify",
+    "play": "Reproducir {{title}}",
+    "hidePlayer": "Ocultar el reproductor de {{title}}",
+    "remove": "Quitar",
+    "empty": "Añade hasta 10 canciones de Spotify para que la gente conozca tu música.",
+    "addLabel": "Añadir una canción",
+    "addHint": "En Spotify, toca Compartir, luego Copiar enlace de la canción, y pégalo aquí.",
+    "add": "Añadir canción",
+    "errors": {
+      "not_a_track": "Eso no es un enlace de una canción de Spotify. Debe empezar por https://open.spotify.com/track/.",
+      "song_not_found": "Spotify no ha encontrado esa canción.",
+      "already_added": "Esa canción ya está en tu perfil.",
+      "too_many_songs": "Ya tienes 10 canciones. Quita una para añadir otra.",
+      "other": "No se ha podido añadir la canción. Inténtalo de nuevo."
+    }
   }
 }
