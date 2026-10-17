@@ -14,23 +14,28 @@ test('spam is rate limited, reported, removed and its author banned', async ({ b
 
   await test.step('the 11th comment in a minute is refused', async () => {
     await openSeededEvent(spammer);
-    await spammer.getByLabel('Your comment').fill(spam);
+    const box = spammer.getByLabel('Your comment');
+    const tooOften = spammer.getByText("You're doing that too often");
+    await box.fill(spam);
     await spammer.getByText('Post comment', { exact: true }).click();
     await spammer.getByText(spam).waitFor();
-    for (let i = 0; i < 10; i++) {
-      await spammer.getByLabel('Your comment').fill('spam ' + i);
+    // Wait for each post to finish (the box empties) before typing the next one.
+    for (let i = 0; i < 10 && !(await tooOften.count()); i++) {
+      await expect(box).toHaveValue('');
+      await box.fill('spam ' + i);
       await spammer.getByText('Post comment', { exact: true }).click();
-      await sleep(400);
+      await expect.poll(async () => (await box.inputValue()) === '' || (await tooOften.count()) > 0).toBe(true);
     }
-    await spammer.getByText("You're doing that too often").waitFor();
+    await tooOften.waitFor();
   });
 
   const bea = await signIn(browser, `bea${s}@example.com`, 'bea_' + s);
   await test.step('another person reports the comment', async () => {
     await openSeededEvent(bea);
     await bea.getByText(spam).waitFor();
-    // Comments are oldest first, so the spam comment is the first one ana posted.
-    await bea.getByLabel('Report comment').first().click();
+    // The innermost block holding both the spam text and a Report button is its comment.
+    await bea.locator('div').filter({ has: bea.getByText(spam) }).filter({ has: bea.getByLabel('Report comment') })
+      .last().getByLabel('Report comment').click();
     await bea.getByText('Spam or scam').click();
     await bea.getByLabel('Details (optional)').fill('Selling watches ' + s);
     await bea.getByText('Send report').locator('visible=true').click();
