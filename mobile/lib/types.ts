@@ -35,3 +35,8 @@ export type MyEvent = WithNullable<
   Functions['my_events']['Returns'][number],
   'ends_at' | 'cancelled_at' | 'cover_photo_path'
 >;
+
+export type EventComment = WithNullable<
+  Functions['event_comments']['Returns'][number],
+  'reply_to' | 'body' | 'author_avatar_path'
+>;

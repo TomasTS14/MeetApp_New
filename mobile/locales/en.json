@@ -87,7 +87,16 @@
     "locating": "Finding your location…",
     "locationDenied": "Location is off, so you're seeing events around Valencia.",
     "empty": "No events match. Try a larger distance or other dates.",
-    "distance": "{{km}} km away"
+    "distance": "{{km}} km away",
+    "cards": "Cards",
+    "list": "List",
+    "undo": "Undo",
+    "details": "See details",
+    "swipeHint": "Swipe right for going, left for not going, up for interested.",
+    "deckEmpty": "You've seen every event here. Try a larger distance or other dates, or check the list.",
+    "answerNo": "No",
+    "answerInterested": "Interested",
+    "answerYes": "Going"
   },
   "event": {
     "going": "{{count}} going",
@@ -106,8 +115,7 @@
     "cancel": "Cancel event",
     "cancelConfirm": "Cancel this event? Everyone who answered will see it as cancelled.",
     "cancelled": "This event was cancelled.",
-    "notFound": "This event doesn't exist or you can't see it.",
-    "comingSoon": "Comments and organizer updates arrive in phase 2."
+    "notFound": "This event doesn't exist or you can't see it."
   },
   "create": {
     "title": "New event",
@@ -157,5 +165,29 @@
   "settings": {
     "signOut": "Sign out",
     "more": "Privacy, language, text size and theme settings arrive in phase 3."
+  },
+  "edit": {
+    "title": "Edit event",
+    "submit": "Save changes"
+  },
+  "updates": {
+    "title": "Updates from the organizer",
+    "new": "New update",
+    "hint": "Everyone who answered going, interested or is on the waitlist sees it in For you.",
+    "post": "Post update",
+    "empty": "No updates yet."
+  },
+  "comments": {
+    "title": "Comments and questions",
+    "aliasNote": "You appear under your alias for this event. Only your friends see your username.",
+    "new": "Your comment",
+    "placeholder": "Ask something or say hi",
+    "post": "Post comment",
+    "reply": "Reply",
+    "delete": "Delete",
+    "deleted": "Comment deleted",
+    "you": "You",
+    "empty": "No comments yet. Be the first to ask something.",
+    "replyingTo": "Replying to {{name}}"
   }
 }

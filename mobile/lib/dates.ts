@@ -33,3 +33,21 @@ export function formatEventDate(iso: string, language: string) {
     minute: '2-digit',
   }).format(new Date(iso));
 }
+
+// "5 minutes ago", "yesterday", "3 days ago" in the app's language.
+export function formatRelative(iso: string, language: string, now = new Date()) {
+  const seconds = Math.round((new Date(iso).getTime() - now.getTime()) / 1000);
+  const units: [Intl.RelativeTimeFormatUnit, number][] = [
+    ['year', 31536000],
+    ['month', 2592000],
+    ['week', 604800],
+    ['day', 86400],
+    ['hour', 3600],
+    ['minute', 60],
+  ];
+  const format = new Intl.RelativeTimeFormat(language, { numeric: 'auto' });
+  for (const [unit, size] of units) {
+    if (Math.abs(seconds) >= size) return format.format(Math.round(seconds / size), unit);
+  }
+  return format.format(0, 'minute');
+}

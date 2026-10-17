@@ -293,7 +293,10 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "delete_comment":
+            "clear_rsvp":
+{ Args: { "p_event": string }; Returns: undefined
+                           },
+"delete_comment":
 { Args: { "p_comment": string }; Returns: undefined
                            },
 "event_comments":

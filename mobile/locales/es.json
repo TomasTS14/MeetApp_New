@@ -87,7 +87,16 @@
     "locating": "Buscando tu ubicación…",
     "locationDenied": "La ubicación está desactivada, así que ves eventos en Valencia.",
     "empty": "No hay eventos. Prueba con más distancia u otras fechas.",
-    "distance": "A {{km}} km"
+    "distance": "A {{km}} km",
+    "cards": "Tarjetas",
+    "list": "Lista",
+    "undo": "Deshacer",
+    "details": "Ver detalles",
+    "swipeHint": "Desliza a la derecha para ir, a la izquierda para no ir, hacia arriba si te interesa.",
+    "deckEmpty": "Ya has visto todos los eventos de aquí. Prueba con más distancia u otras fechas, o mira la lista.",
+    "answerNo": "No",
+    "answerInterested": "Me interesa",
+    "answerYes": "Voy"
   },
   "event": {
     "going": "{{count}} van",
@@ -106,8 +115,7 @@
     "cancel": "Cancelar evento",
     "cancelConfirm": "¿Cancelar este evento? Todos los que respondieron lo verán cancelado.",
     "cancelled": "Este evento se ha cancelado.",
-    "notFound": "Este evento no existe o no puedes verlo.",
-    "comingSoon": "Los comentarios y las novedades del organizador llegan en la fase 2."
+    "notFound": "Este evento no existe o no puedes verlo."
   },
   "create": {
     "title": "Nuevo evento",
@@ -157,5 +165,29 @@
   "settings": {
     "signOut": "Cerrar sesión",
     "more": "Los ajustes de privacidad, idioma, tamaño del texto y tema llegan en la fase 3."
+  },
+  "edit": {
+    "title": "Editar evento",
+    "submit": "Guardar cambios"
+  },
+  "updates": {
+    "title": "Novedades del organizador",
+    "new": "Nueva novedad",
+    "hint": "La verán en Para ti quienes van, están interesados o en lista de espera.",
+    "post": "Publicar novedad",
+    "empty": "Aún no hay novedades."
+  },
+  "comments": {
+    "title": "Comentarios y preguntas",
+    "aliasNote": "Apareces con tu alias para este evento. Solo tus amigos ven tu nombre de usuario.",
+    "new": "Tu comentario",
+    "placeholder": "Pregunta algo o saluda",
+    "post": "Publicar comentario",
+    "reply": "Responder",
+    "delete": "Eliminar",
+    "deleted": "Comentario eliminado",
+    "you": "Tú",
+    "empty": "Aún no hay comentarios. Sé el primero en preguntar.",
+    "replyingTo": "Respondiendo a {{name}}"
   }
 }
