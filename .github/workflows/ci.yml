@@ -33,3 +33,55 @@ jobs:
           version: latest
       - run: supabase db start
       - run: supabase test db
+
+  browser:
+    name: Browser tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            mobile/package-lock.json
+            e2e/package-lock.json
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - run: supabase start -x realtime,studio,imgproxy,logflare,vector,supavisor
+      - name: Serve edge functions
+        run: |
+          echo "SPOTIFY_OEMBED_URL=http://host.docker.internal:8787/oembed" > "$RUNNER_TEMP/functions.env"
+          nohup supabase functions serve --env-file "$RUNNER_TEMP/functions.env" > "$RUNNER_TEMP/functions.log" 2>&1 &
+      - name: Export the web app
+        working-directory: mobile
+        run: |
+          npm ci
+          eval "$(supabase status -o env | grep -E '^(API_URL|PUBLISHABLE_KEY)=')"
+          EXPO_PUBLIC_SUPABASE_URL="$API_URL" EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY="$PUBLISHABLE_KEY" \
+            npx expo export --platform web
+      - name: Install Playwright
+        working-directory: e2e
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+      - name: Wait for edge functions
+        run: |
+          for i in $(seq 60); do
+            [ "$(curl -s -o /dev/null -w '%{http_code}' -X OPTIONS http://127.0.0.1:54321/functions/v1/spotify-song)" = 200 ] && exit 0
+            sleep 2
+          done
+          cat "$RUNNER_TEMP/functions.log"; exit 1
+      - run: npx playwright test
+        working-directory: e2e
+      - if: failure()
+        run: cp "$RUNNER_TEMP/functions.log" e2e/test-results/ 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-test-results
+          path: |
+            e2e/playwright-report
+            e2e/test-results
+          retention-days: 7
