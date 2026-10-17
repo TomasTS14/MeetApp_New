@@ -10,6 +10,7 @@ Find events near you, say yes, and talk about them under a per-event alias. One 
 | `supabase/migrations/` | The database: tables, privacy rules and the functions the app calls. |
 | `supabase/functions/` | Edge functions: `spotify-song` (adds a song to a profile), `delete-account` and `ban-user` (admins only). |
 | `supabase/tests/` | pgTAP tests for the privacy rules, the waitlist, onboarding, photo uploads, friends, songs and data export. |
+| `e2e/` | Browser tests (Playwright) that run the exported web app against the local stack. |
 | `supabase/seed.sql` | Local test data: two organizers and six events in Valencia. |
 | `docs/privacy.md` | The privacy rules and where each one is enforced. |
 | `docs/screen-map.md` | Every screen, what it shows and which data it uses. |
@@ -42,7 +43,17 @@ Sign-in emails use `supabase/templates/sign_in_code.html`. The hosted project ne
 
 ## Checks
 
-CI runs on every pull request: `npm run lint` and `npm run typecheck` in `mobile/`, and `supabase test db` for the database.
+CI runs on every pull request: `npm run lint` and `npm run typecheck` in `mobile/`, `supabase test db` for the database, and the browser tests in `e2e/`. They cover private events and invite links, reporting and banning, spam limits, songs, sharing, data export and account deletion. When they fail, the run keeps a screenshot and a trace of each failing test.
+
+Running the browser tests locally, with `supabase start` running:
+
+```bash
+echo "SPOTIFY_OEMBED_URL=http://host.docker.internal:8787/oembed" > /tmp/functions.env
+supabase functions serve --env-file /tmp/functions.env &   # songs use a stand-in for Spotify
+supabase db reset                                           # tests expect the seed data
+(cd mobile && npx expo export --platform web)
+cd e2e && npm install && npx playwright install chromium && npx playwright test
+```
 
 ## Plan
 
