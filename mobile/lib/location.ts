@@ -11,6 +11,10 @@ type PositionState =
   | { status: 'ready'; coords: Coordinates }
   | { status: 'denied'; coords: Coordinates };
 
+// How long to wait for the position (including an unanswered permission prompt)
+// before showing events around Valencia instead.
+const POSITION_TIMEOUT_MS = 8000;
+
 // The device's position, asked for once. It is only sent with each Nearby request and
 // never stored on the server.
 export function useCurrentPosition(): PositionState {
@@ -18,6 +22,9 @@ export function useCurrentPosition(): PositionState {
 
   useEffect(() => {
     let cancelled = false;
+    const fallback = setTimeout(() => {
+      if (!cancelled) setState((current) => (current.status === 'loading' ? { status: 'denied', coords: VALENCIA } : current));
+    }, POSITION_TIMEOUT_MS);
     (async () => {
       try {
         const permission = await Location.requestForegroundPermissionsAsync();
@@ -27,6 +34,7 @@ export function useCurrentPosition(): PositionState {
         }
         const position = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
         if (!cancelled) {
+          clearTimeout(fallback);
           setState({
             status: 'ready',
             coords: { latitude: position.coords.latitude, longitude: position.coords.longitude },
@@ -38,6 +46,7 @@ export function useCurrentPosition(): PositionState {
     })();
     return () => {
       cancelled = true;
+      clearTimeout(fallback);
     };
   }, []);
 
