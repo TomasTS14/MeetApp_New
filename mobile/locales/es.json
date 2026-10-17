@@ -30,7 +30,8 @@
     "verify": "Entrar",
     "changeEmail": "Usar otro correo",
     "invalidEmail": "Introduce un correo válido.",
-    "invalidCode": "Ese código no funciona. Revísalo o pide uno nuevo."
+    "invalidCode": "Ese código no funciona. Revísalo o pide uno nuevo.",
+    "subtitleEvent": "Inicia sesión o crea una cuenta para ver el evento que te han compartido."
   },
   "onboarding": {
     "title": "Elige tu nombre de usuario",
@@ -124,7 +125,9 @@
     "endBeforeStart": "El final tiene que ser después del inicio.",
     "maxInvalid": "Escribe un número entero mayor que 0, o déjalo vacío.",
     "pickDate": "Elige fecha y hora",
-    "clear": "Quitar"
+    "clear": "Quitar",
+    "private": "Evento privado",
+    "privateHint": "Solo lo ven las personas que invites. No aparece en Cerca."
   },
   "myEvents": {
     "organizing": "Organizas",
@@ -135,7 +138,8 @@
       "organizer": "Organizador",
       "yes": "Voy",
       "interested": "Me interesa",
-      "waitlisted": "Lista de espera"
+      "waitlisted": "Lista de espera",
+      "invited": "Invitado"
     }
   },
   "profile": {
@@ -295,5 +299,25 @@
     "ban": "Expulsar",
     "removeAndBan": "Eliminar y expulsar",
     "confirmBan": "Toca otra vez para expulsar a @{{username}}"
+  },
+  "invites": {
+    "title": "Invitar a gente",
+    "hint": "Invita a tus amigos aquí o comparte el enlace de invitación con quien quieras.",
+    "shareLink": "Compartir enlace de invitación",
+    "linkCopied": "Enlace de invitación copiado.",
+    "invited": "Invitados",
+    "friends": "Tus amigos",
+    "invite": "Invitar",
+    "remove": "Quitar",
+    "noFriends": "Añade amigos para invitarlos aquí, o comparte el enlace de invitación.",
+    "answer": {
+      "yes": "Va",
+      "interested": "Le interesa",
+      "no": "No va",
+      "waitlisted": "Lista de espera",
+      "none": "Sin respuesta"
+    },
+    "private": "Privado",
+    "badLink": "Este enlace de invitación ya no funciona. Pide uno nuevo a quien organiza."
   }
 }

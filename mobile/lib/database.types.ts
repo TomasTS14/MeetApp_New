@@ -107,6 +107,32 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"event_invites": {
+                  Row: {
+                    "created_at": string,"event_id": string,"user_id": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "created_at"?: string,"event_id": string,"user_id": string
+                  }
+                  Update: {
+                    "created_at"?: string,"event_id"?: string,"user_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "event_invites_event_id_fkey"
+      columns: ["event_id"]
+isOneToOne: false
+      referencedRelation: "events"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "event_invites_user_id_fkey"
+      columns: ["user_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"event_photos": {
                   Row: {
                     "created_at": string,"event_id": string,"id": string,"position": number,"storage_path": string
@@ -149,14 +175,14 @@ isOneToOne: false
                   ]
                 },"events": {
                   Row: {
-                    "address": string,"area_label": string,"cancelled_at": string | null,"category": Database["public"]['Enums']["event_category"],"created_at": string,"description": string,"ends_at": string | null,"id": string,"location": unknown,"max_participants": number | null,"organizer_id": string,"starts_at": string,"title": string,"visibility": Database["public"]['Enums']["event_visibility"]
+                    "address": string,"area_label": string,"cancelled_at": string | null,"category": Database["public"]['Enums']["event_category"],"created_at": string,"description": string,"ends_at": string | null,"id": string,"invite_code": string,"location": unknown,"max_participants": number | null,"organizer_id": string,"starts_at": string,"title": string,"visibility": Database["public"]['Enums']["event_visibility"]
                   }
                   ComputedFields: never
                   Insert: {
-                    "address": string,"area_label": string,"cancelled_at"?: string | null,"category"?: Database["public"]['Enums']["event_category"],"created_at"?: string,"description"?: string,"ends_at"?: string | null,"id"?: string,"location": unknown,"max_participants"?: number | null,"organizer_id"?: string,"starts_at": string,"title": string,"visibility"?: Database["public"]['Enums']["event_visibility"]
+                    "address": string,"area_label": string,"cancelled_at"?: string | null,"category"?: Database["public"]['Enums']["event_category"],"created_at"?: string,"description"?: string,"ends_at"?: string | null,"id"?: string,"invite_code"?: string,"location": unknown,"max_participants"?: number | null,"organizer_id"?: string,"starts_at": string,"title": string,"visibility"?: Database["public"]['Enums']["event_visibility"]
                   }
                   Update: {
-                    "address"?: string,"area_label"?: string,"cancelled_at"?: string | null,"category"?: Database["public"]['Enums']["event_category"],"created_at"?: string,"description"?: string,"ends_at"?: string | null,"id"?: string,"location"?: unknown,"max_participants"?: number | null,"organizer_id"?: string,"starts_at"?: string,"title"?: string,"visibility"?: Database["public"]['Enums']["event_visibility"]
+                    "address"?: string,"area_label"?: string,"cancelled_at"?: string | null,"category"?: Database["public"]['Enums']["event_category"],"created_at"?: string,"description"?: string,"ends_at"?: string | null,"id"?: string,"invite_code"?: string,"location"?: unknown,"max_participants"?: number | null,"organizer_id"?: string,"starts_at"?: string,"title"?: string,"visibility"?: Database["public"]['Enums']["event_visibility"]
                   }
                   Relationships: [
                     {
@@ -293,7 +319,10 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "admin_reports":
+            "accept_invite":
+{ Args: { "p_code": string,"p_event": string }; Returns: boolean
+                           },
+"admin_reports":
 { Args: Record<PropertyKey, never>; Returns: {
               "author_id": string,"author_is_banned": boolean,"author_username": string,"event_id": string,"event_title": string,"first_reported_at": string,"preview": string,"reasons": (string)[],"report_count": number,"target_id": string,"target_type": Database["public"]['Enums']["report_target"]
             }[]
@@ -312,6 +341,14 @@ isOneToOne: false
               "author_avatar_path": string,"author_is_friend": boolean,"author_is_organizer": boolean,"author_is_verified": boolean,"author_name": string,"body": string,"created_at": string,"id": string,"is_deleted": boolean,"is_mine": boolean,"reply_to": string
             }[]
                            },
+"event_invite_code":
+{ Args: { "p_event": string }; Returns: string
+                           },
+"event_invitees":
+{ Args: { "p_event": string }; Returns: {
+              "avatar_path": string,"rsvp": Database["public"]['Enums']["rsvp_status"],"user_id": string,"username": string
+            }[]
+                           },
 "export_my_data":
 { Args: Record<PropertyKey, never>; Returns: Json
                            },
@@ -324,6 +361,9 @@ isOneToOne: false
 { Args: { "p_event": string }; Returns: {
               "address": string,"area_label": string,"cancelled_at": string,"category": Database["public"]['Enums']["event_category"],"description": string,"ends_at": string,"going_count": number,"id": string,"interested_count": number,"is_organizer": boolean,"latitude": number,"location_is_exact": boolean,"longitude": number,"max_participants": number,"my_rsvp": Database["public"]['Enums']["rsvp_status"],"organizer_is_friend": boolean,"organizer_is_verified": boolean,"organizer_name": string,"photo_paths": (string)[],"starts_at": string,"title": string,"visibility": Database["public"]['Enums']["event_visibility"],"waitlist_count": number
             }[]
+                           },
+"invite_friends":
+{ Args: { "p_event": string,"p_users": (string)[] }; Returns: number
                            },
 "is_admin":
 { Args: Record<PropertyKey, never>; Returns: boolean
@@ -343,6 +383,9 @@ isOneToOne: false
                            },
 "set_rsvp":
 { Args: { "p_event": string,"p_status": Database["public"]['Enums']["rsvp_status"] }; Returns: Database["public"]['Enums']["rsvp_status"]
+                           },
+"uninvite":
+{ Args: { "p_event": string,"p_user": string }; Returns: undefined
                            }
           }
           Enums: {

@@ -35,6 +35,7 @@ export default function EditEventScreen() {
         longitude: e.longitude,
         address: e.address,
         areaLabel: e.area_label,
+        isPrivate: e.visibility === 'private',
         photoPaths: e.photo_paths ?? [],
       }}
       submitLabel={t('edit.submit')}

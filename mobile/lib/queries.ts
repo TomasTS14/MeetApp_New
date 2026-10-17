@@ -148,6 +148,7 @@ export type NewEvent = {
   longitude: number;
   address: string;
   areaLabel: string;
+  isPrivate: boolean;
   photos: NewPhoto[];
 };
 
@@ -167,6 +168,7 @@ export function useCreateEvent() {
           location: `SRID=4326;POINT(${event.longitude} ${event.latitude})`,
           address: event.address.trim(),
           area_label: event.areaLabel.trim(),
+          visibility: event.isPrivate ? 'private' : 'public',
         })
         .select('id')
         .single();
@@ -203,6 +205,7 @@ export function useUpdateEvent(eventId: string) {
           location: `SRID=4326;POINT(${event.longitude} ${event.latitude})`,
           address: event.address.trim(),
           area_label: event.areaLabel.trim(),
+          visibility: event.isPrivate ? 'private' : 'public',
         })
         .eq('id', eventId);
       if (error) throw error;

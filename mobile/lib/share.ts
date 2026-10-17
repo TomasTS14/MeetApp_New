@@ -5,15 +5,21 @@ import { Platform, Share } from 'react-native';
 // so they open for anyone, with or without the app. Falls back to this app's own link.
 const webUrl = process.env.EXPO_PUBLIC_WEB_URL?.replace(/\/$/, '');
 
-export function eventLink(eventId: string) {
-  if (webUrl) return `${webUrl}/event/${eventId}`;
-  if (Platform.OS === 'web') return `${window.location.origin}/event/${eventId}`;
-  return Linking.createURL(`/event/${eventId}`);
+// With an invite code, the link also lets people in to a private event.
+export function eventLink(eventId: string, inviteCode?: string | null) {
+  const path = `/event/${eventId}${inviteCode ? `?invite=${encodeURIComponent(inviteCode)}` : ''}`;
+  if (webUrl) return `${webUrl}${path}`;
+  if (Platform.OS === 'web') return `${window.location.origin}${path}`;
+  return Linking.createURL(path);
 }
 
 // Opens the share sheet where there is one; otherwise copies the link.
-export async function shareEvent(eventId: string, title: string): Promise<'shared' | 'copied' | 'cancelled'> {
-  const url = eventLink(eventId);
+export async function shareEvent(
+  eventId: string,
+  title: string,
+  inviteCode?: string | null
+): Promise<'shared' | 'copied' | 'cancelled'> {
+  const url = eventLink(eventId, inviteCode);
   if (Platform.OS !== 'web') {
     const result = await Share.share(Platform.OS === 'ios' ? { url, message: title } : { message: `${title}\n${url}` });
     return result.action === Share.dismissedAction ? 'cancelled' : 'shared';

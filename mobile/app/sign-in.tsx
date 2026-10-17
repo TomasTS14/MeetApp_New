@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Text, View } from '@/components/Themed';
 import { Button, Muted, TextField } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
+import { pendingLink } from '@/lib/pendingLink';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -55,7 +56,7 @@ export default function SignInScreen() {
       <View style={styles.flex}>
         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
           <Text style={styles.title}>{t('auth.title')}</Text>
-          <Muted style={styles.subtitle}>{t('auth.subtitle')}</Muted>
+          <Muted style={styles.subtitle}>{pendingLink() ? t('auth.subtitleEvent') : t('auth.subtitle')}</Muted>
 
           {!codeSent ? (
             <>
