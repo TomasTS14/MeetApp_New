@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/ui';
+import { isRateLimited } from '@/lib/errors';
 import {
   useAnswerFriendRequest,
   useRelationship,
@@ -22,7 +23,14 @@ export function FriendButton({ personId, compact }: { personId: string; compact?
 
   switch (relationship) {
     case 'none':
-      return <Button label={t('friends.add')} onPress={() => send.mutate(personId)} loading={send.isPending} style={style} />;
+      return (
+        <Button
+          label={isRateLimited(send.error) ? t('friends.tryLater') : t('friends.add')}
+          onPress={() => send.mutate(personId)}
+          loading={send.isPending}
+          style={style}
+        />
+      );
     case 'incoming':
       return (
         <Button

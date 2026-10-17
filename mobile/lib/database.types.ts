@@ -229,14 +229,14 @@ isOneToOne: false
                   ]
                 },"reports": {
                   Row: {
-                    "created_at": string,"id": string,"reason": string,"reporter_id": string,"resolved_at": string | null,"target_id": string,"target_type": Database["public"]['Enums']["report_target"]
+                    "created_at": string,"id": string,"reason": string,"reporter_id": string,"resolution": string | null,"resolved_at": string | null,"target_id": string,"target_type": Database["public"]['Enums']["report_target"]
                   }
                   ComputedFields: never
                   Insert: {
-                    "created_at"?: string,"id"?: string,"reason": string,"reporter_id"?: string,"resolved_at"?: string | null,"target_id": string,"target_type": Database["public"]['Enums']["report_target"]
+                    "created_at"?: string,"id"?: string,"reason": string,"reporter_id"?: string,"resolution"?: string | null,"resolved_at"?: string | null,"target_id": string,"target_type": Database["public"]['Enums']["report_target"]
                   }
                   Update: {
-                    "created_at"?: string,"id"?: string,"reason"?: string,"reporter_id"?: string,"resolved_at"?: string | null,"target_id"?: string,"target_type"?: Database["public"]['Enums']["report_target"]
+                    "created_at"?: string,"id"?: string,"reason"?: string,"reporter_id"?: string,"resolution"?: string | null,"resolved_at"?: string | null,"target_id"?: string,"target_type"?: Database["public"]['Enums']["report_target"]
                   }
                   Relationships: [
                     {
@@ -293,7 +293,15 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "clear_rsvp":
+            "admin_reports":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "author_id": string,"author_is_banned": boolean,"author_username": string,"event_id": string,"event_title": string,"first_reported_at": string,"preview": string,"reasons": (string)[],"report_count": number,"target_id": string,"target_type": Database["public"]['Enums']["report_target"]
+            }[]
+                           },
+"admin_resolve_reports":
+{ Args: { "p_resolution": string,"p_target": string,"p_target_type": Database["public"]['Enums']["report_target"] }; Returns: undefined
+                           },
+"clear_rsvp":
 { Args: { "p_event": string }; Returns: undefined
                            },
 "delete_comment":
@@ -316,6 +324,9 @@ isOneToOne: false
 { Args: { "p_event": string }; Returns: {
               "address": string,"area_label": string,"cancelled_at": string,"category": Database["public"]['Enums']["event_category"],"description": string,"ends_at": string,"going_count": number,"id": string,"interested_count": number,"is_organizer": boolean,"latitude": number,"location_is_exact": boolean,"longitude": number,"max_participants": number,"my_rsvp": Database["public"]['Enums']["rsvp_status"],"organizer_is_friend": boolean,"organizer_is_verified": boolean,"organizer_name": string,"photo_paths": (string)[],"starts_at": string,"title": string,"visibility": Database["public"]['Enums']["event_visibility"],"waitlist_count": number
             }[]
+                           },
+"is_admin":
+{ Args: Record<PropertyKey, never>; Returns: boolean
                            },
 "my_events":
 { Args: { "p_include_past"?: boolean }; Returns: {

@@ -1,4 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Switch } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +8,7 @@ import { PersonRow } from '@/components/PersonRow';
 import { Text, View } from '@/components/Themed';
 import { Button, Chip, Loading, Muted, useColors } from '@/components/ui';
 import { useDeleteAccount, useExportData } from '@/lib/account';
+import { useIsAdmin } from '@/lib/moderation';
 import { useSettings, useUpdateSettings, type Settings } from '@/lib/settings';
 import { useBlocks, useUnblock } from '@/lib/social';
 import { supabase } from '@/lib/supabase';
@@ -30,6 +32,7 @@ export default function SettingsScreen() {
   const exportData = useExportData();
   const deleteAccount = useDeleteAccount();
   const [confirmingDelete, setConfirmingDelete] = useState(false);
+  const isAdmin = useIsAdmin();
 
   const signOut = async () => {
     await supabase.auth.signOut();
@@ -57,6 +60,8 @@ export default function SettingsScreen() {
 
   return (
     <ScrollView style={{ backgroundColor: colors.background }} contentContainerStyle={styles.page}>
+      {isAdmin.data && <Button label={t('admin.open')} onPress={() => router.push('/admin')} />}
+
       <View style={styles.section}>
         <Text style={styles.heading}>{t('settings.language')}</Text>
         <View style={styles.chips}>

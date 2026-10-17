@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Avatar } from '@/components/Avatar';
 import { FriendButton } from '@/components/FriendButton';
 import { ProfileSongs } from '@/components/ProfileSongs';
+import { ReportButton } from '@/components/ReportButton';
 import { Text, View } from '@/components/Themed';
 import { Button, Centered, Loading, Muted, useColors } from '@/components/ui';
 import { useBlock, usePerson, useRelationship } from '@/lib/social';
@@ -67,6 +68,7 @@ export default function PersonScreen() {
                 }
               />
             )}
+            <ReportButton targetType="user" targetId={p.id} look="button" />
           </>
         )}
         <ProfileSongs profileId={p.id} />

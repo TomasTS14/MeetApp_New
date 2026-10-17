@@ -39,7 +39,7 @@ export default function EditEventScreen() {
       }}
       submitLabel={t('edit.submit')}
       busy={updateEvent.isPending}
-      failed={updateEvent.isError}
+      error={updateEvent.error}
       onSubmit={(values) => updateEvent.mutate(values, { onSuccess: () => router.back() })}
     />
   );

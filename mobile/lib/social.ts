@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { profileQueryKey, useAuth } from '@/lib/auth';
 import type { Tables } from '@/lib/database.types';
+import { AVATAR_MAX_SIDE, shrinkPhoto } from '@/lib/photos';
 import { supabase } from '@/lib/supabase';
 
 export type Person = Pick<Tables<'profiles'>, 'id' | 'username' | 'bio' | 'avatar_path' | 'id_verified_at'>;
@@ -168,9 +169,10 @@ export function useUploadAvatar() {
   return useMutation({
     mutationFn: async (photo: { uri: string; mimeType: string }) => {
       const me = session!.user.id;
-      const body = await (await fetch(photo.uri)).arrayBuffer();
-      const path = `${me}/avatar-${Date.now()}.${photo.mimeType.split('/')[1] ?? 'jpg'}`;
-      const upload = await supabase.storage.from('avatars').upload(path, body, { contentType: photo.mimeType });
+      const small = await shrinkPhoto(photo.uri, AVATAR_MAX_SIDE);
+      const body = await (await fetch(small.uri)).arrayBuffer();
+      const path = `${me}/avatar-${Date.now()}.jpg`;
+      const upload = await supabase.storage.from('avatars').upload(path, body, { contentType: small.mimeType });
       if (upload.error) throw upload.error;
       const { error } = await supabase.from('profiles').update({ avatar_path: path }).eq('id', me);
       if (error) throw error;
