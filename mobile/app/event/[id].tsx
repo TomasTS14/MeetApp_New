@@ -1,16 +1,19 @@
 import { Image } from 'expo-image';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, Platform, ScrollView, StyleSheet, useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { EventComments } from '@/components/EventComments';
+import { EventInvites } from '@/components/EventInvites';
 import { EventUpdates } from '@/components/EventUpdates';
 import { ReportButton } from '@/components/ReportButton';
 import { Text, View } from '@/components/Themed';
 import { Button, Centered, Loading, Muted, useColors } from '@/components/ui';
 import { addToCalendar } from '@/lib/calendar';
 import { formatEventDate } from '@/lib/dates';
+import { useAcceptInvite } from '@/lib/invites';
+import { clearPendingLink } from '@/lib/pendingLink';
 import { useCancelEvent, useEvent, useSetRsvp } from '@/lib/queries';
 import { shareEvent } from '@/lib/share';
 import { eventPhotoUrl } from '@/lib/supabase';
@@ -30,16 +33,26 @@ function confirm(message: string, back: string, action: string, onConfirm: () =>
 }
 
 export default function EventScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  // "invite" carries the code from a private event's invite link.
+  const { id, invite } = useLocalSearchParams<{ id: string; invite?: string }>();
   const { t, i18n } = useTranslation();
   const colors = useColors();
   const { width } = useWindowDimensions();
-  const event = useEvent(id);
+  const acceptInvite = useAcceptInvite(id);
+  const { mutate: accept } = acceptInvite;
+  // With an invite link, load the event only once the invite is accepted. A load started
+  // alongside it can finish first and cache "not found".
+  const event = useEvent(id, !invite || acceptInvite.isSuccess || acceptInvite.isError);
   const setRsvp = useSetRsvp(id);
   const cancelEvent = useCancelEvent(id);
   const [shareNote, setShareNote] = useState<'copied' | 'failed' | null>(null);
 
-  if (event.isPending) return <Loading />;
+  useEffect(() => {
+    clearPendingLink();
+    if (invite) accept(invite);
+  }, [invite, accept]);
+
+  if (event.isPending || acceptInvite.isPending) return <Loading />;
   if (event.isError) {
     return (
       <Centered>
@@ -52,7 +65,7 @@ export default function EventScreen() {
   if (!e) {
     return (
       <Centered>
-        <Muted>{t('event.notFound')}</Muted>
+        <Muted>{acceptInvite.data === false ? t('invites.badLink') : t('event.notFound')}</Muted>
       </Centered>
     );
   }
@@ -99,7 +112,10 @@ export default function EventScreen() {
         )}
 
         <View style={styles.content}>
-          <Muted style={styles.category}>{t(`categories.${e.category}`)}</Muted>
+          <Muted style={styles.category}>
+            {t(`categories.${e.category}`)}
+            {e.visibility === 'private' ? ` · ${t('invites.private')}` : ''}
+          </Muted>
           <Text style={[styles.title, cancelled && styles.cancelledTitle]}>{e.title}</Text>
           {cancelled && <Text style={{ color: colors.danger }}>{t('event.cancelled')}</Text>}
 
@@ -123,7 +139,10 @@ export default function EventScreen() {
 
           {!cancelled && (
             <View style={styles.shareRow}>
-              <Button label={t('event.share')} variant="secondary" onPress={share} style={styles.answer} />
+              {/* A private event is shared through its invite link, below. */}
+              {e.visibility === 'public' && (
+                <Button label={t('event.share')} variant="secondary" onPress={share} style={styles.answer} />
+              )}
               <Button label={t('event.addToCalendar')} variant="secondary" onPress={calendar} style={styles.answer} />
             </View>
           )}
@@ -183,6 +202,7 @@ export default function EventScreen() {
             )
           )}
 
+          {e.is_organizer && e.visibility === 'private' && !cancelled && <EventInvites eventId={id} title={e.title} />}
           <EventUpdates eventId={id} isOrganizer={e.is_organizer} />
           <EventComments eventId={id} isOrganizer={e.is_organizer} />
           {!e.is_organizer && <ReportButton targetType="event" targetId={id} look="button" />}

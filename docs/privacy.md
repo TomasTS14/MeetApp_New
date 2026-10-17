@@ -29,6 +29,12 @@ MeetApp's promise is that people can talk about events without being identifiabl
 18. **Banning goes through the `ban-user` edge function**, which looks the author up on the server and bans them in Supabase Auth, so they can no longer sign in.
 19. **Rate limits** refuse more than 10 comments a minute (200 a day), 30 friend requests, 20 reports and 10 new events a day, and 10 organizer updates an hour, per person.
 
+## Private events
+
+20. **Private events are seen only by the organizer, invited people and people who already answered.** They never appear in Nearby or For you, and they cannot be shared with the Share button.
+21. **Invites go to friends only.** `invite_friends()` skips anyone who is not a friend or is blocked either way. The guest list (`event_invitees()`) is shown only to the organizer.
+22. **The invite link carries a secret code** (`events.invite_code`) that only the organizer can read, through `event_invite_code()`. Opening the link while signed in adds the person to the invited people; a wrong code reveals nothing.
+
 ## Accounts and data (GDPR, Spain)
 
 12. **Data is hosted in an EU region.**

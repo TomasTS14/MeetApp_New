@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Switch } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { DateTimeField } from '@/components/DateTimeField';
@@ -27,6 +27,7 @@ export type EventFormValues = {
   longitude: number;
   address: string;
   areaLabel: string;
+  isPrivate: boolean;
   newPhotos: NewPhoto[];
   removedPhotoPaths: string[];
 };
@@ -82,6 +83,7 @@ export function EventForm({ initial, submitLabel, busy, error, onSubmit }: Props
   const [areaLabel, setAreaLabel] = useState(initial?.areaLabel ?? '');
   const [keptPhotos, setKeptPhotos] = useState<string[]>(initial?.photoPaths ?? []);
   const [newPhotos, setNewPhotos] = useState<NewPhoto[]>([]);
+  const [isPrivate, setIsPrivate] = useState(initial?.isPrivate ?? false);
   const [errors, setErrors] = useState<Errors>({});
 
   const near = position.status === 'loading' ? null : position.coords;
@@ -146,6 +148,7 @@ export function EventForm({ initial, submitLabel, busy, error, onSubmit }: Props
       longitude: point.longitude,
       address,
       areaLabel,
+      isPrivate,
       newPhotos,
       removedPhotoPaths: (initial?.photoPaths ?? []).filter((path) => !keptPhotos.includes(path)),
     });
@@ -272,6 +275,19 @@ export function EventForm({ initial, submitLabel, busy, error, onSubmit }: Props
           {photoCount < MAX_PHOTOS && <Button label={t('create.addPhoto')} variant="secondary" onPress={pickPhotos} />}
         </View>
 
+        <View style={styles.privateRow}>
+          <View style={styles.privateText}>
+            <Text style={styles.privateLabel}>{t('create.private')}</Text>
+            <Muted>{t('create.privateHint')}</Muted>
+          </View>
+          <Switch
+            accessibilityLabel={t('create.private')}
+            value={isPrivate}
+            onValueChange={setIsPrivate}
+            trackColor={{ true: colors.accent, false: colors.border }}
+          />
+        </View>
+
         {!!error && <Text style={{ color: colors.danger }}>{errorText(t, error)}</Text>}
         <Button label={submitLabel} onPress={submit} loading={busy} disabled={!near && !place} />
       </ScrollView>
@@ -281,6 +297,9 @@ export function EventForm({ initial, submitLabel, busy, error, onSubmit }: Props
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
+  privateRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  privateText: { flex: 1, gap: 2 },
+  privateLabel: { fontSize: 16, fontWeight: '600' },
   form: {
     padding: 16,
     gap: 20,

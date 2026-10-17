@@ -10,6 +10,8 @@ import { useColorScheme } from '@/components/useColorScheme';
 import { AuthProvider, useAuth } from '@/lib/auth';
 import { SettingsProvider } from '@/lib/settings';
 import '@/lib/i18n';
+// Read the opening URL before any redirect to sign-in replaces it (screens load lazily on web).
+import '@/lib/pendingLink';
 
 export {
   // Catch any errors thrown by the Layout component.

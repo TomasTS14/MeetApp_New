@@ -30,7 +30,8 @@
     "verify": "Sign in",
     "changeEmail": "Use a different email",
     "invalidEmail": "Enter a valid email address.",
-    "invalidCode": "That code didn't work. Check it or ask for a new one."
+    "invalidCode": "That code didn't work. Check it or ask for a new one.",
+    "subtitleEvent": "Sign in or create an account to see the event that was shared with you."
   },
   "onboarding": {
     "title": "Choose your username",
@@ -124,7 +125,9 @@
     "endBeforeStart": "The end must be after the start.",
     "maxInvalid": "Enter a whole number above 0, or leave it empty.",
     "pickDate": "Choose date and time",
-    "clear": "Clear"
+    "clear": "Clear",
+    "private": "Private event",
+    "privateHint": "Only people you invite can see it. It won't appear in Nearby."
   },
   "myEvents": {
     "organizing": "You organize",
@@ -135,7 +138,8 @@
       "organizer": "Organizer",
       "yes": "Going",
       "interested": "Interested",
-      "waitlisted": "Waitlist"
+      "waitlisted": "Waitlist",
+      "invited": "Invited"
     }
   },
   "profile": {
@@ -295,5 +299,25 @@
     "ban": "Ban",
     "removeAndBan": "Remove and ban",
     "confirmBan": "Tap again to ban @{{username}}"
+  },
+  "invites": {
+    "title": "Invite people",
+    "hint": "Invite friends here, or share the invite link with anyone you want to come.",
+    "shareLink": "Share invite link",
+    "linkCopied": "Invite link copied.",
+    "invited": "Invited",
+    "friends": "Your friends",
+    "invite": "Invite",
+    "remove": "Remove",
+    "noFriends": "Add friends to invite them here, or share the invite link.",
+    "answer": {
+      "yes": "Going",
+      "interested": "Interested",
+      "no": "Not going",
+      "waitlisted": "Waitlist",
+      "none": "No answer yet"
+    },
+    "private": "Private",
+    "badLink": "This invite link doesn't work anymore. Ask the organizer for a new one."
   }
 }
